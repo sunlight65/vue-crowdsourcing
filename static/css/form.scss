@@ -1,0 +1,16 @@
+// 通用表单格式
+.form-group, .form-label, .form-field {
+  float: left;
+}
+
+.form-group {
+  width: 100%;
+
+  $formWidthPct: 0.2;
+  @while $formWidthPct < 0.7 {
+    .pct-#{$formWidthPct * 100} {
+      width: percentage($formWidthPct);
+    }
+    $formWidthPct: $formWidthPct + 0.05;
+  }
+}

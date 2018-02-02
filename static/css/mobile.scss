@@ -1,0 +1,9 @@
+// 移动端通用样式
+@mixin mobileBodyBase() {
+  @media only screen and (min-width: 0) and (max-width: 600px) {
+    -webkit-overflow-scrolling: touch; // Native端滚动时模拟原生的弹性滚动效果
+    -webkit-tap-highlight-color: transparent; // IOS 禁用链接点击时半透明背景
+    -webkit-touch-callout: none; // IOS 禁用长按页面时的弹出菜单
+    overflow-y: scroll;
+  }
+}

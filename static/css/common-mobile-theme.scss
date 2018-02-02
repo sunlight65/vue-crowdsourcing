@@ -1,0 +1,12 @@
+/**
+ * 通用移动端主题样式
+ * 只能在各个theme.scss中引入，不能在其他地方引入
+ */
+#viewPort {
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  position: fixed;
+  right: 0;
+  top: 0;
+}

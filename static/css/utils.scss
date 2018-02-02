@@ -1,0 +1,71 @@
+// 页面基本样式
+@mixin htmlBase() {
+  -webkit-appearance: none; // 消除输入框和按钮的原生外观
+  -webkit-text-size-adjust:none; // 允许chrome 字体小于12px
+  -webkit-user-select:none; // 禁止页面文字选择
+  font-size: 100px; // 1rem = 100px
+}
+
+// body基本样式
+@mixin bodyBase($pageColor: #fff, $fontColor: #333) {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  background-color: $pageColor;
+  color: $fontColor;
+  font-family: "Helvetica Neue Regular",PingFangSC-Light,"Helvetica Neue", Helvetica, STHeiTi,"Microsoft YaHei", sans-serif;
+  font-size: 0.14rem;
+  letter-spacing: 0.01rem;
+  margin: 0;
+  min-height: 100%;
+  user-select: none;
+  visibility: visible;
+}
+
+// 屏幕适配
+@mixin mediaScreen($maxWidth: 600px, $minWidth: 0) {
+    @media only screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+      @content;
+    }
+}
+
+@mixin mediaQuery() {
+    @media only screen
+        and (min-device-width: 320px)
+        and (max-device-width: 736px) {
+        @content;
+    }
+}
+
+@mixin mediaQuerySmall() {
+    @media only screen
+        and (min-device-width: 320px)
+        and (max-device-width: 365px) {
+        @content;
+    }
+}
+
+@mixin mediaMed() {
+    @media (max-width:1400px) and (min-width:736px) {
+        @content;
+    }
+}
+
+//2x图
+@mixin media2x($url){
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2),
+  only screen and (min-device-pixel-ratio: 2) {
+
+      background-image: $url;
+
+  }
+}
+
+// IE10 ~ IE11
+@mixin isIE(){
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
