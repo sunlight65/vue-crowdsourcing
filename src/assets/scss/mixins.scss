@@ -1,0 +1,151 @@
+// 页面基本样式
+@mixin html() {
+  html {
+    -webkit-appearance: none; // 消除输入框和按钮的原生外观
+    -webkit-text-size-adjust:none; // 允许chrome 字体小于12px
+    -webkit-user-select:none; // 禁止页面文字选择
+    font-size: 100px; // 1rem = 100px
+  }
+}
+
+// body基本样式
+@mixin body($pageColor: #fff, $fontColor: #333) {
+  body {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -webkit-user-select: none;
+    background-color: $pageColor;
+    color: $fontColor;
+    font-family: "Helvetica Neue Regular",PingFangSC-Light,"Helvetica Neue", Helvetica, STHeiTi,"Microsoft YaHei", sans-serif;
+    font-size: 0.14rem;
+    letter-spacing: 0.01rem;
+    margin: 0;
+    min-height: 100%;
+    user-select: none;
+    visibility: visible;
+  }
+}
+
+// 移动端通用样式
+@mixin mobile() {
+  @media only screen and (min-width: 0) and (max-width: 736px) {
+    html,body{
+      height: 100%; // 配合-webkit-overflow-scrolling: touch;，不能省
+      overflow: auto; // 配合-webkit-overflow-scrolling: touch;，不能省
+      -webkit-overflow-scrolling: touch; // Native端滚动时模拟原生的弹性滚动效果
+      -webkit-tap-highlight-color: transparent; // IOS 禁用链接点击时半透明背景
+      -webkit-touch-callout: none; // IOS 禁用长按页面时的弹出菜单
+    }
+  }
+}
+
+/**
+ * 通用主题样式
+ * 只能在各个theme.scss中引入，不能在其他地方引入
+ */
+@mixin common() {
+  [v-cloak] {
+    display: none!important;
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0;
+  
+    li {
+      list-style: none;
+    }
+  }
+  
+  a {
+    color: #333;
+    text-decoration: none;
+  
+    &:link, &:visited, &:hover {
+      text-decoration: none;
+      outline: none;
+    }
+  }
+  
+  input:focus {
+    outline: none;
+  }
+  
+  table {
+    border-collapse:collapse;
+  
+    thead {
+      box-shadow: none;
+  
+      th {
+        text-align: left;
+        text-transform: none;
+      }
+    }
+    tbody {
+      td {
+        text-align: left;
+      }
+    }
+  }
+  
+  .center {
+    text-align: center;
+  }
+  
+  .left {
+    text-align: left;
+  }
+  
+  .right {
+    text-align: right;
+  }
+}
+
+// 屏幕适配
+@mixin mediaScreen($maxWidth: 600px, $minWidth: 0) {
+    @media only screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+      @content;
+    }
+}
+
+@mixin mediaQuery() {
+    @media only screen
+        and (min-device-width: 320px)
+        and (max-device-width: 736px) {
+        @content;
+    }
+}
+
+@mixin mediaQuerySmall() {
+    @media only screen
+        and (min-device-width: 320px)
+        and (max-device-width: 365px) {
+        @content;
+    }
+}
+
+@mixin mediaMed() {
+    @media (max-width:1400px) and (min-width:736px) {
+        @content;
+    }
+}
+
+//2x图
+@mixin media2x($url){
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min-moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2),
+  only screen and (min-device-pixel-ratio: 2) {
+
+      background-image: $url;
+
+  }
+}
+
+// IE10 ~ IE11
+@mixin isIE(){
+  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+    @content;
+  }
+}
