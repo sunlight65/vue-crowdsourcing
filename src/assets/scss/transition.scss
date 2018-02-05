@@ -78,3 +78,8 @@
     transform: scale(1);
   }
 }
+
+// 旋转
+.clockwise {
+  transform: rotate(90deg);
+}

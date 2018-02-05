@@ -20,9 +20,10 @@ $pageColor: #ededf2;
 @include common();
 
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100%;
+}
+
+#app {
+  width: 100%;
 }
 </style>

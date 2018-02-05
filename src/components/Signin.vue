@@ -1,6 +1,7 @@
 <template>
   <div class="container">
-    <div class="logo">{{ $t("msg.email") }}</div>
+    <page-header></page-header>
+    <div class="logo">{{ $t("msg.sign_in") }}</div>
     <div class="login-item">
       <form action="" method="post" class="form form-login">
         <div class="form-field">
@@ -15,13 +16,19 @@
           <input type="submit" value="Log in">
         </div>
       </form>
+      <router-link :to="{ path: '/forgot_password' }" class="forgot-password">{{ $t("msg.forgot_password") }}</router-link>
     </div>
 </div>
 </template>
 
 <script>
+import PageNavBar from '@/components/Header'
+
 export default {
   name: 'Signin',
+  components: {
+    'page-header': PageNavBar
+  },
   data () {
     return {
     }
@@ -34,9 +41,13 @@ export default {
   background:rgba(58,63,68,0.5);
   border-radius: 5px;
   box-shadow: 0 1.5px 0 0 rgba(0,0,0,0.1);
-  width:450px;
+  width: 4.5rem;
   display: flex;
   flex-direction: column;
+
+  @include if_mobile() {
+    width: 100%;
+  }
 }
 
 .logo{
@@ -134,7 +145,10 @@ input {
   width: 1px;
 }
 
-.text--center {
+.forgot-password {
+  display: block;
+  padding: 0.1rem;
+  border-bottom: 1px solid #333;
   text-align: center;
 }
 </style>

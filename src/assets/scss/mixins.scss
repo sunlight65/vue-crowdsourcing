@@ -103,30 +103,24 @@
 }
 
 // 屏幕适配
-@mixin mediaScreen($maxWidth: 600px, $minWidth: 0) {
+@mixin mediaScreen($maxWidth: 736px, $minWidth: 0) {
     @media only screen and (min-width: $minWidth) and (max-width: $maxWidth) {
       @content;
     }
 }
 
-@mixin mediaQuery() {
+@mixin if_mobile() {
     @media only screen
         and (min-device-width: 320px)
-        and (max-device-width: 736px) {
+        and (max-device-width: 812px) {
         @content;
     }
 }
 
-@mixin mediaQuerySmall() {
+@mixin if_small_mobile() {
     @media only screen
         and (min-device-width: 320px)
         and (max-device-width: 365px) {
-        @content;
-    }
-}
-
-@mixin mediaMed() {
-    @media (max-width:1400px) and (min-width:736px) {
         @content;
     }
 }
