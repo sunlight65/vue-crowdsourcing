@@ -28,6 +28,7 @@ $pageColor: #ededf2;
 @include mobile();
 @include common();
 @include form();
+@include theme();
 
 body {
   min-height: 100%;

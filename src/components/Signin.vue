@@ -11,7 +11,7 @@
         <input id="password" type="password" class="form-input" v-bind:placeholder="$t('msg.password')" required>
       </div>
       <div class="form-field">
-        <input type="submit" v-bind:value="$t('msg.sign_in')">
+        <input type="submit" v-bind:value="$t('msg.sign_in')" class="btn">
       </div>
       <router-link :to="{ path: '/forgot_password' }" class="forgot-password">{{ $t("msg.forgot_password") }}</router-link>
       <router-link :to="{ path: '/sign_up' }" class="sign-up">{{ $t("msg.sign_up") }}</router-link>

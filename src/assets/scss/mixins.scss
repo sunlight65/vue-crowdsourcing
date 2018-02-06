@@ -127,8 +127,7 @@
   
     & label, input[type="text"], input[type="password"], input[type="submit"] {
       border-radius: 0.025rem;
-      padding: 0.1rem;
-      color: #3A3F44;    
+      padding: 0.1rem;   
     }
 
     & label {
@@ -150,21 +149,24 @@
       }
     }
 
-    & input[type="submit"] {
-      background-color: #00B9BC;
-      color: #eee;
-      font-weight: bold;
-      text-transform: uppercase;
-
-      &:focus,
-      &:hover {
-        background-color: #197071;
-      }
-    }
-
     .form-field {
       display: flex;
       margin-bottom: 0.2rem;
+    }
+  }
+}
+
+// 自定义主题样式
+@mixin theme() {
+  .btn {
+    background-color: #00B9BC;
+    color: #eee;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &:focus,
+    &:hover {
+      background-color: #197071;
     }
   }
 }

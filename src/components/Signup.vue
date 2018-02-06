@@ -15,7 +15,7 @@
         <input id="password-confirm" type="password" class="form-input" v-bind:placeholder="$t('msg.password_confirm')" required>
       </div>
       <div class="form-field">
-        <input type="submit" v-bind:value="$t('msg.sign_up')">
+        <input type="submit" v-bind:value="$t('msg.sign_up')" class="btn">
       </div>
       <router-link :to="{ path: '/terms_of_service' }" class="terms-of-service">{{ $t("msg.terms_of_service") }}</router-link>
       <router-link :to="{ path: '/sign_in' }" class="sign-in">{{ $t("msg.sign_in") }}</router-link>

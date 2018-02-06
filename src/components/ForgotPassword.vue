@@ -7,7 +7,7 @@
         <input id="email" type="text" class="form-input" v-bind:placeholder="$t('msg.email')" required>
       </div>
       <div class="form-field">
-        <input type="submit" v-bind:value="$t('msg.reset_password')">
+        <input type="submit" v-bind:value="$t('msg.reset_password')" class="btn">
       </div>
       <router-link :to="{ path: '/sign_in' }" class="sign-in">{{ $t("msg.sign_in") }}</router-link>
       <router-link :to="{ path: '/sign_up' }" class="sign-up">{{ $t("msg.sign_up") }}</router-link>

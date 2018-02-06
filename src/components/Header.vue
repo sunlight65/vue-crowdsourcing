@@ -5,8 +5,12 @@
       <li>menu1</li>
       <li>menu2</li>
       <li>menu3</li>
+      <li class="sign-in-up">
+        <router-link :to="{ path: '/sign_in' }" class="sign-in btn" @click.native="toggleBurger()">{{ $t("msg.sign_in") }}</router-link>
+        <router-link :to="{ path: '/sign_up' }" class="sign-up btn" @click.native="toggleBurger()">{{ $t("msg.sign_up") }}</router-link>
+      </li>
     </ul>
-    <div v-bind:class="{ 'iconfont icon-view-list burger': true, 'clockwise': isHorizontalBurger }" @click="triggerBurger()"></div>
+    <div v-bind:class="{ 'iconfont icon-view-list burger': true, 'clockwise': isHorizontalBurger }" @click="toggleBurger()"></div>
   </div>
 </template>
 
@@ -19,7 +23,7 @@ export default {
     }
   },
   methods: {
-    triggerBurger () {
+    toggleBurger () {
       this.isHorizontalBurger = !this.isHorizontalBurger
     }
   }
@@ -27,7 +31,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$fontColor: #fff;
+$fontColor: #ddd;
+$fontHoverColor: #fff;
 $backgroundColor: #616161;
 $headerHeight: 0.5rem;
 
@@ -46,13 +51,18 @@ $headerHeight: 0.5rem;
 }
 
 .nav-menu {
+  flex-grow: 1;
+
   @include if_mobile() {
+    width: 2rem;
+    flex-grow: 0;
     position: absolute;
     left: 0;
     top: $headerHeight;
     transition: all .3s ease-in-out;
     opacity: 0;
     visibility:hidden;
+    background-color: #2b2b2b;
 
     &.pop {
       opacity: 1;
@@ -64,10 +74,27 @@ $headerHeight: 0.5rem;
     float: left;
     padding: 0.1rem;
     cursor: pointer;
+    &:hover {
+      color: $fontHoverColor;
+    }
 
     @include if_mobile() {
       float: none;
       background-color: #888;
+    }
+
+    &.sign-in-up {
+      float: right;
+      display: flex;
+      justify-content: space-around;
+
+      & a {
+        padding: 0 0.05rem;
+      }
+
+      @include if_mobile() {
+        float: none;
+      }
     }
   }
 }
