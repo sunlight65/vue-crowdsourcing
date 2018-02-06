@@ -1,19 +1,15 @@
 <template>
   <div class="container">
-    <div class="title">{{ $t("msg.sign_in") }}</div>
+    <div class="title">{{ $t("msg.forgot_password") }}</div>
     <form action="" method="post" class="form form-login">
       <div class="form-field">
-        <label class="iconfont icon-user" for="username"><span class="hidden">{{ $t('msg.username') }}</span></label>
-        <input id="username" type="text" class="form-input" v-bind:placeholder="$t('msg.email')" required>
+        <label class="iconfont icon-user" for="email"><span class="hidden">{{ $t('msg.username') }}</span></label>
+        <input id="email" type="text" class="form-input" v-bind:placeholder="$t('msg.email')" required>
       </div>
       <div class="form-field">
-        <label class="iconfont icon-lock" for="password"><span class="hidden">{{ $t('msg.password') }}</span></label>
-        <input id="password" type="password" class="form-input" v-bind:placeholder="$t('msg.password')" required>
+        <input type="submit" v-bind:value="$t('msg.reset_password')">
       </div>
-      <div class="form-field">
-        <input type="submit" v-bind:value="$t('msg.sign_in')">
-      </div>
-      <router-link :to="{ path: '/forgot_password' }" class="forgot-password">{{ $t("msg.forgot_password") }}</router-link>
+      <router-link :to="{ path: '/sign_in' }" class="sign-in">{{ $t("msg.sign_in") }}</router-link>
       <router-link :to="{ path: '/sign_up' }" class="sign-up">{{ $t("msg.sign_up") }}</router-link>
     </form>
 </div>
@@ -21,7 +17,7 @@
 
 <script>
 export default {
-  name: 'Signin',
+  name: 'ForgotPassword',
   data () {
     return {
     }
@@ -56,7 +52,7 @@ export default {
   margin: 0.2rem 0.2rem 0;
 }
 
-.forgot-password {
+.sign-in {
   display: block;
   padding: 0.1rem;
   border-bottom: 1px solid #333;

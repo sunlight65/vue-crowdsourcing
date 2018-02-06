@@ -1,12 +1,12 @@
 <template>
   <div class="page-header">
-    <div class="title">ABCDEFG</div>
-    <ul class="nav-menu">
+    <div class="title">{{ $t("msg.brand") }}</div>
+    <ul v-bind:class="{ 'nav-menu': true, 'pop': isHorizontalBurger }">
       <li>menu1</li>
       <li>menu2</li>
       <li>menu3</li>
     </ul>
-    <div class="iconfont icon-view-list"></div>
+    <div v-bind:class="{ 'iconfont icon-view-list burger': true, 'clockwise': isHorizontalBurger }" @click="triggerBurger()"></div>
   </div>
 </template>
 
@@ -15,7 +15,12 @@ export default {
   name: 'Header',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      isHorizontalBurger: false
+    }
+  },
+  methods: {
+    triggerBurger () {
+      this.isHorizontalBurger = !this.isHorizontalBurger
     }
   }
 }
@@ -45,6 +50,14 @@ $headerHeight: 0.5rem;
     position: absolute;
     left: 0;
     top: $headerHeight;
+    transition: all .3s ease-in-out;
+    opacity: 0;
+    visibility:hidden;
+
+    &.pop {
+      opacity: 1;
+      visibility:visible;
+    }
   }
 
   li {
@@ -63,7 +76,7 @@ $headerHeight: 0.5rem;
   padding: 0.1rem;
 }
 
-.icon-view-list {
+.burger {
   display: none;
   position: absolute;
   left: 0.1rem;

@@ -1,12 +1,21 @@
 <template>
   <div id="app">
+    <page-header></page-header>
     <router-view/>
+    <page-footer></page-footer>
   </div>
 </template>
 
 <script>
+import PageHeader from '@/components/Header'
+import PageFooter from '@/components/Footer'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'page-header': PageHeader,
+    'page-footer': PageFooter
+  }
 }
 </script>
 
@@ -18,6 +27,7 @@ $pageColor: #ededf2;
 @include body($pageColor, $fontColor);
 @include mobile();
 @include common();
+@include form();
 
 body {
   min-height: 100%;

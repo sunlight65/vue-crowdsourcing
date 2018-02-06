@@ -39,10 +39,7 @@
   }
 }
 
-/**
- * 通用主题样式
- * 只能在各个theme.scss中引入，不能在其他地方引入
- */
+// 通用主题样式
 @mixin common() {
   [v-cloak] {
     display: none!important;
@@ -66,9 +63,28 @@
       outline: none;
     }
   }
-  
-  input:focus {
-    outline: none;
+
+  input {
+    border: 0;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    transition: background-color .3s;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
   }
   
   table {
@@ -99,6 +115,57 @@
   
   .right {
     text-align: right;
+  }
+}
+
+// 表单主题样式
+ @mixin form() {
+  .form {
+    & input[type="password"], input[type="text"], input[type="submit"] {
+      width: 100%;
+    }
+  
+    & label, input[type="text"], input[type="password"], input[type="submit"] {
+      border-radius: 0.025rem;
+      padding: 0.1rem;
+      color: #3A3F44;    
+    }
+
+    & label {
+      background-color: #222222;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      padding-left: 0.125rem;
+      padding-right: 0.125rem;
+    }
+
+    & input[type="text"], input[type="password"] {
+      background-color: #ffffff;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+
+      &:focus,
+      &:hover {
+        background-color: #eeeeee;
+      }
+    }
+
+    & input[type="submit"] {
+      background-color: #00B9BC;
+      color: #eee;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      &:focus,
+      &:hover {
+        background-color: #197071;
+      }
+    }
+
+    .form-field {
+      display: flex;
+      margin-bottom: 0.2rem;
+    }
   }
 }
 
