@@ -4,7 +4,7 @@ import Home from '@/components/HelloWorld'
 import Signin from '@/components/Signin'
 import Signup from '@/components/Signup'
 import ForgotPassword from '@/components/ForgotPassword'
-import messages from './messages'
+import messages from '@/assets/js/messages'
 
 Vue.use(Router)
 

@@ -11,7 +11,10 @@ const messages = {
       password_confirm: '确认密码',
       terms_of_service: '使用条款',
       reset_password: '重置密码',
-      copy_right: '版权所有'
+      copy_right: '版权所有',
+      logining: '登录中...',
+      registering: '注册中...',
+      resetting: '重置中...'
     }
   }
 }

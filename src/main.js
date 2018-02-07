@@ -2,9 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import App from './App'
-import router from './js/router'
-import messages from './js/messages'
+import App from '@/App'
+import router from '@/router'
+import messages from '@/assets/js/messages'
 
 Vue.config.productionTip = false
 Vue.use(VueI18n)
