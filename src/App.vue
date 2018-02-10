@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <page-header></page-header>
-    <router-view/>
+      <keep-alive>
+        <router-view/>
+      </keep-alive>
     <page-footer></page-footer>
   </div>
 </template>
@@ -21,7 +23,7 @@ export default {
 
 <style lang="scss">
 $fontColor: #333;
-$pageColor: #ededf2;
+$pageColor: #F8F9FA;
 
 @include html();
 @include body($pageColor, $fontColor);

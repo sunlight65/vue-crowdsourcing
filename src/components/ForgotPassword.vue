@@ -1,10 +1,10 @@
 <template>
   <div class="container">
     <div class="title">{{ $t("msg.forgot_password") }}</div>
-    <form class="form" @submit.prevent="submit">
+    <form class="form main-content" @submit.prevent="submit">
       <div class="form-field">
         <label class="iconfont icon-user" for="email"><span class="hidden">{{ $t('msg.username') }}</span></label>
-        <input id="email" type="text" class="form-input" v-bind:placeholder="$t('msg.email')">
+        <input id="email" type="text" class="form-input" :placeholder="$t('msg.email')">
       </div>
       <div class="form-field">
         <input type="submit" :value="lblSumbit($t('msg.resetting'), $t('msg.reset_password'))"
@@ -49,7 +49,6 @@ export default {
 .form {
   color: #ffff;
   padding:0.25rem 0.25rem 0;
-  margin: 0.2rem 0.2rem 0;
 }
 
 .sign-in {

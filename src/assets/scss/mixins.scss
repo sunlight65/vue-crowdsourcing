@@ -57,6 +57,7 @@
   a {
     color: #333;
     text-decoration: none;
+    transition: all 0.4s ease;
   
     &:link, &:visited, &:hover {
       text-decoration: none;
@@ -159,6 +160,7 @@
 // 自定义主题样式
 @mixin theme() {
   .btn {
+    padding: 0.05rem 0.1rem;
     background-color: #00B9BC;
     color: #eee;
     font-weight: bold;
@@ -172,6 +174,19 @@
     &[disabled] {
       background-color: grey;
     }
+  }
+
+  .main-content {
+    margin: 0.2rem;
+  }
+
+  .strong {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+
+  .small {
+    font-size: 0.12rem;
   }
 }
 

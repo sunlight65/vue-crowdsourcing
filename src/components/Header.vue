@@ -1,7 +1,7 @@
 <template>
   <div class="page-header">
-    <div class="title">{{ $t("msg.brand") }}</div>
-    <ul v-bind:class="{ 'nav-menu': true, 'pop': isHorizontalBurger }">
+    <router-link class="title strong" :to="{ path: '/' }">{{ $t("msg.brand") }}</router-link>
+    <ul :class="{ 'nav-menu': true, 'pop': isHorizontalBurger }">
       <li>menu1</li>
       <li>menu2</li>
       <li>menu3</li>
@@ -10,7 +10,7 @@
         <router-link :to="{ path: '/sign_up' }" class="sign-up btn" @click.native="toggleBurger()">{{ $t("msg.sign_up") }}</router-link>
       </li>
     </ul>
-    <div v-bind:class="{ 'iconfont icon-view-list burger': true, 'clockwise': isHorizontalBurger }" @click="toggleBurger()"></div>
+    <div :class="{ 'iconfont icon-view-list burger': true, 'clockwise': isHorizontalBurger }" @click="toggleBurger()"></div>
   </div>
 </template>
 
@@ -100,7 +100,10 @@ $headerHeight: 0.5rem;
 }
 
 .title {
+  display: block;
   padding: 0.1rem;
+  font-weight: 700;
+  color: #fff;
 }
 
 .burger {
