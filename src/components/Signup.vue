@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="title">{{ $t("msg.sign_up") }}</div>
-    <form class="form main-content" @submit.prevent="submit">
+    <form class="form main-content" @submit.prevent="submitWrap">
       <div class="form-field">
         <label class="iconfont icon-user" for="username"><span class="hidden">{{ $t('msg.username') }}</span></label>
         <input id="username" type="text" class="form-input" :placeholder="$t('msg.email')">

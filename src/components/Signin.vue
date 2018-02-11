@@ -1,14 +1,14 @@
 <template>
   <div class="container">
     <div class="title">{{ $t("msg.sign_in") }}</div>
-    <form class="form main-content" @submit.prevent="submit">
+    <form class="form main-content" @submit.prevent="submitWrap">
       <div class="form-field">
         <label class="iconfont icon-user" for="username"><span class="hidden">{{ $t('msg.username') }}</span></label>
-        <input id="username" type="text" class="form-input" :placeholder="$t('msg.email')">
+        <input id="username" type="text" class="form-input" :placeholder="$t('msg.email')" v-model="username">
       </div>
       <div class="form-field">
         <label class="iconfont icon-lock" for="password"><span class="hidden">{{ $t('msg.password') }}</span></label>
-        <input id="password" type="password" class="form-input" :placeholder="$t('msg.password')">
+        <input id="password" type="password" class="form-input" :placeholder="$t('msg.password')" v-model="password">
       </div>
       <div class="form-field">
         <input type="submit" :value="lblSumbit($t('msg.logining'), $t('msg.sign_in'))"
@@ -22,10 +22,41 @@
 
 <script>
 import formMixin from '@/assets/js/formMixin'
+import api from '@/assets/js/api'
+import webStorage from '@/assets/js/webStorage'
 
 export default {
   name: 'Signin',
-  mixins: [formMixin]
+  mixins: [formMixin],
+  data () {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    submit: function (e, postSumbit) {
+      const vm = this
+
+      api.post(
+        {
+          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/login',
+          data: {
+            username: vm.username,
+            password: vm.password
+          },
+          onSuccess: function ({data}) {
+            const tk = data.data.tk
+            if (tk) {
+              webStorage.local.set(webStorage.local.KEY.tk, tk)
+              vm.$router.push('/profile')
+            }
+          },
+          onFinally: postSumbit
+        }
+      )
+    }
+  }
 }
 </script>
 

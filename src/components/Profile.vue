@@ -12,7 +12,7 @@
       <div class="btn-bar">
         <router-link :to="{ path: '/edit_profile' }" class="btn">{{ $t("msg.edit_info") }}</router-link>
         <router-link :to="{ path: '/change_password' }" class="btn">{{ $t("msg.change_password") }}</router-link>
-        <router-link :to="{ path: '/edit_profile' }" class="btn">{{ $t("msg.sign_out") }}</router-link>
+        <a href="javascript:" class="btn" @click="logout">{{ $t("msg.sign_out") }}</a>
       </div>
     </div>
     <div class="auth-info">
@@ -28,6 +28,9 @@
 </template>
 
 <script>
+import api from '@/assets/js/api'
+import webStorage from '@/assets/js/webStorage'
+
 export default {
   name: 'Profile',
   data () {
@@ -43,12 +46,39 @@ export default {
   methods: {
     getProfile () {
       const vm = this
-      vm.profile = {
-        userPic: '/static/img/user_default_pic.png',
-        userName: 'userName',
-        email: 'abc@abc.com',
-        lastLoginTime: '2018-02-19 20:06'
-      }
+
+      api.get(
+        {
+          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/profile',
+          onSuccess: function ({data}) {
+            data = data.data
+            vm.profile = {
+              userPic: data.userPic,
+              userName: data.userName,
+              email: data.email,
+              lastLoginTime: data.lastLoginTime
+            }
+          }
+        }
+      )
+    },
+
+    logout () {
+      const vm = this
+
+      api.post(
+        {
+          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/logout',
+          data: {
+            username: vm.username,
+            password: vm.password
+          },
+          onSuccess: function ({data}) {
+            webStorage.local.clear()
+            vm.$router.push('/sign_in')
+          }
+        }
+      )
     }
   }
 }
@@ -72,7 +102,7 @@ export default {
 
 .content-bar {
   display: flex;
-  
+
   .user-pic {
     width: 0.7rem;
     height: 0.7rem;
