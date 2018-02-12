@@ -6,8 +6,8 @@
       <li>menu2</li>
       <li>menu3</li>
       <li class="sign-in-up">
-        <router-link :to="{ path: '/sign_in' }" class="sign-in btn" @click.native="toggleBurger()">{{ $t("msg.sign_in") }}</router-link>
-        <router-link :to="{ path: '/sign_up' }" class="sign-up btn" @click.native="toggleBurger()">{{ $t("msg.sign_up") }}</router-link>
+        <router-link :to="{ path: '/sign_in' }" class="sign-in btn frame-fake" @click.native="toggleBurger()">{{ $t("msg.sign_in") }}</router-link>
+        <router-link :to="{ path: '/sign_up' }" class="sign-up btn frame" @click.native="toggleBurger()">{{ $t("msg.sign_up") }}</router-link>
       </li>
     </ul>
     <div :class="{ 'iconfont icon-view-list burger': true, 'clockwise': isHorizontalBurger }" @click="toggleBurger()"></div>
@@ -73,7 +73,9 @@ $headerHeight: 0.5rem;
   li {
     float: left;
     padding: 0.1rem;
+    font-weight: bold;
     cursor: pointer;
+
     &:hover {
       color: $fontHoverColor;
     }
@@ -90,12 +92,17 @@ $headerHeight: 0.5rem;
 
       & a {
         padding: 0 0.05rem;
+        margin: 0 0.02rem;
       }
 
       @include if_mobile() {
         float: none;
       }
     }
+  }
+
+  a {
+    color: $fontHoverColor;
   }
 }
 

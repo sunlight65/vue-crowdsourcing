@@ -121,12 +121,14 @@
 
 // 表单主题样式
  @mixin form() {
-  .form {
+  form {
     & input[type="password"], input[type="text"], input[type="submit"] {
-      width: 100%;
+      @include if_mobile() {
+        width: 100%;
+      }
     }
   
-    & label, input[type="text"], input[type="password"], input[type="submit"] {
+    & label, input[type="text"], input[type="password"] {
       border-radius: 0.025rem;
       padding: 0.1rem;   
     }
@@ -159,16 +161,52 @@
 
 // 自定义主题样式
 @mixin theme() {
+  $mainForeColor: #00B9BC;
+  $activeForeColor: #197071;
+
   .btn {
     padding: 0.05rem 0.1rem;
-    background-color: #00B9BC;
-    color: #eee;
     font-weight: bold;
     text-transform: uppercase;
+    border-radius: 0.025rem;
 
-    &:focus,
-    &:hover {
-      background-color: #197071;
+    &.primary {
+      background-color: $mainForeColor;
+      color: #eee;
+
+      &:focus,
+      &:hover {
+        background-color: $activeForeColor;
+      }
+    }
+
+    &.cancel {
+      margin-left: 0.04rem;
+      min-width: 0.3rem;
+
+      &:focus,
+      &:hover {
+        color: rgb(110, 110, 110);
+      }
+    }
+
+    &.frame {
+      border: 1px solid $mainForeColor;
+
+      &:focus,
+      &:hover {
+        background-color: $mainForeColor;
+      }
+    }
+
+    &.frame-fake {
+      border: 1px solid transparent;
+
+      &:focus,
+      &:hover {
+        border-color: $mainForeColor;
+        background-color: $mainForeColor;
+      }
     }
 
     &[disabled] {

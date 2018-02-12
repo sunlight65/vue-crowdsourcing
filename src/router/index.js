@@ -5,6 +5,9 @@ import Signin from '@/components/Signin'
 import Signup from '@/components/Signup'
 import ForgotPassword from '@/components/ForgotPassword'
 import Profile from '@/components/Profile'
+import ProfileDetail from '@/components/ProfileDetail'
+import ProfileEdit from '@/components/ProfileEdit'
+import ChangePassword from '@/components/ChangePassword'
 import messages from '@/assets/js/messages'
 
 Vue.use(Router)
@@ -46,7 +49,21 @@ export default new Router({
       component: Profile,
       meta: {
         title: $(messages.cn.msg.my_account)
-      }
+      },
+      children: [
+        {
+          path: '',
+          component: ProfileDetail
+        },
+        {
+          path: 'edit',
+          component: ProfileEdit
+        },
+        {
+          path: 'change_password',
+          component: ChangePassword
+        }
+      ]
     }
   ]
 })

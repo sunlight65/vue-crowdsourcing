@@ -16,6 +16,7 @@ const messages = {
       logining: '登录中...',
       registering: '注册中...',
       resetting: '重置中...',
+      saving: '保存中...',
       edit_info: '修改资料',
       change_password: '修改密码',
       id_verification: '身份验证',
@@ -24,7 +25,22 @@ const messages = {
       my_account: '我的账户',
       last_login: '上次登录',
       security_verification: '安全验证',
-      mobile_verification: '手机验证'
+      mobile_verification: '手机验证',
+      confirm_modify: '确认修改',
+      cancel: '取消',
+      modify_profile: '修改个人资料',
+      avater: '个人头像',
+      upload_new_avater: '上传新头像',
+      select_file: '选择文件',
+      no_file_selected: '未选择任何文件',
+      phone_num: '手机号码',
+      language: '语言'
+    },
+    sentence: {
+      old_password: '请输入你原先的密码',
+      new_password: '请输入你的新密码',
+      confirm_password: '请再次输入你的新密码',
+      verified_lock_change: '一旦通过验证，不能修改'
     }
   }
 }

@@ -1,29 +1,32 @@
 <template>
-  <div class="profile main-content">
-    <div class="base-info">
-      <div class="content-bar">
-        <img :src="profile.userPic" alt="User default pic" class="user-pic" />
-        <div class="info-table">
-          <div class="strong">{{ profile.userName }}</div>
-          <div>{{ profile.email }}</div>
-          <div class="small">{{ $t("msg.last_login") + ' ' + profile.lastLoginTime }}</div>
+  <div class="main-content">
+    <div class="profile">
+      <div class="base-info">
+        <div class="content-bar">
+          <img :src="profile.userPic" alt="User pic" class="user-pic" />
+          <div class="info-table">
+            <div class="strong">{{ profile.userName }}</div>
+            <div>{{ profile.email }}</div>
+            <div class="small">{{ $t("msg.last_login") + ' ' + profile.lastLoginTime }}</div>
+          </div>
+        </div>
+        <div class="btn-bar">
+          <router-link :to="{ path: '/profile/edit' }" class="btn primary">{{ $t("msg.edit_info") }}</router-link>
+          <router-link :to="{ path: '/profile/change_password' }" class="btn primary">{{ $t("msg.change_password") }}</router-link>
+          <a href="javascript:" class="btn primary" @click="logout">{{ $t("msg.sign_out") }}</a>
         </div>
       </div>
-      <div class="btn-bar">
-        <router-link :to="{ path: '/edit_profile' }" class="btn">{{ $t("msg.edit_info") }}</router-link>
-        <router-link :to="{ path: '/change_password' }" class="btn">{{ $t("msg.change_password") }}</router-link>
-        <a href="javascript:" class="btn" @click="logout">{{ $t("msg.sign_out") }}</a>
+      <div class="auth-info">
+        <p class="iconfont icon-businesscard">{{ $t("msg.id_verification") }}</p>
+        <p class="iconfont icon-duigou">{{ $t("msg.email_verification") }}</p>
+        <p class="iconfont icon-duigou">{{ $t("msg.real_name_verification") }}</p>
+      </div>
+      <div class="security-info">
+        <p class="iconfont icon-security">{{ $t("msg.security_verification") }}</p>
+        <p class="iconfont icon-duigou">{{ $t("msg.mobile_verification") }}</p>
       </div>
     </div>
-    <div class="auth-info">
-      <p class="iconfont icon-businesscard">{{ $t("msg.id_verification") }}</p>
-      <p class="iconfont icon-duigou">{{ $t("msg.email_verification") }}</p>
-      <p class="iconfont icon-duigou">{{ $t("msg.real_name_verification") }}</p>
-    </div>
-    <div class="security-info">
-      <p class="iconfont icon-security">{{ $t("msg.security_verification") }}</p>
-      <p class="iconfont icon-duigou">{{ $t("msg.mobile_verification") }}</p>
-    </div>
+    <router-view class="sub-view"/>
   </div>
 </template>
 
@@ -86,6 +89,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.main-content {
+  display: flex;
+
+  @include if_mobile() {
+    flex-direction: column;
+  }
+}
+
+.profile {
+  width: 3.4rem;
+  @include if_mobile() {
+    width: 100%;
+  }
+}
+
+.sub-view {
+  margin-left: 0.5rem;
+  @include if_mobile() {
+    margin: 0;
+  }
+}
+
 @mixin icons() {
   .iconfont {
     font-size: 1em;
