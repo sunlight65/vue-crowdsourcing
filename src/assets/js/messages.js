@@ -40,7 +40,8 @@ const messages = {
       old_password: '请输入你原先的密码',
       new_password: '请输入你的新密码',
       confirm_password: '请再次输入你的新密码',
-      verified_lock_change: '一旦通过验证，不能修改'
+      verified_lock_change: '一旦通过验证，不能修改',
+      upload_tip: '只能上传jpg/png文件，且不超过500kb'
     }
   }
 }

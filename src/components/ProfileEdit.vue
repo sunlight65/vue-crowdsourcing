@@ -4,10 +4,20 @@
     <form class="main-content" @submit.prevent="submitWrap">
       <div class="form-field avater">
         <div>{{ $t('msg.avater') }}</div>
-        <img src="/static/img/user_default_pic.png" alt="User default pic" class="user-pic" />
+        <el-upload
+          class="avatar-uploader"
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :show-file-list="false"
+          :on-success="handleAvatarSuccess"
+          :before-upload="beforeAvatarUpload">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <el-button size="small" type="primary">{{ $t('msg.select_file') }}</el-button>
+          <div slot="tip" class="el-upload__tip">{{ $t('sentence.upload_tip') }}</div>
+        </el-upload>
       </div>
       <div class="form-field">
-        <label class="iconfont icon-user" for="old_password"></label>
+        <label class="iconfont icon-lock" for="old_password"></label>
         <input name="old_password" type="password" class="form-input" :placeholder="$t('sentence.old_password')" autofocus="autofocus">
       </div>
       <div class="form-field">
@@ -32,7 +42,29 @@ import formMixin from '@/assets/js/formMixin'
 
 export default {
   name: 'ProfileEdit',
-  mixins: [formMixin]
+  mixins: [formMixin],
+  data () {
+    return {
+      imageUrl: '/static/img/user_default_pic.png'
+    }
+  },
+  methods: {
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw)
+    },
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isJPG && isLt2M
+    }
+  }
 }
 </script>
 
@@ -59,8 +91,10 @@ export default {
       color: #333;
       flex-direction: column;
 
-      .user-pic {
+      .avatar {
+        display: block;
         width: 1rem;
+        margin: 0.1rem 0;
       }
     }
 

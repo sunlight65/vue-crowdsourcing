@@ -51,12 +51,29 @@ export default {
     }
     axios.post(url, data, config)
       .then(function (response) {
-        onSuccess(response)
-        onFinally()
+        if (onSuccess) {
+          onSuccess(response)
+        }
+        if (onFinally) {
+          onFinally()
+        }
       })
       .catch(function (error) {
         onError(error)
-        onFinally()
+        if (onFinally) {
+          onFinally()
+        }
       })
+  },
+  logout: function (vm) {
+    this.post(
+      {
+        url: '/5a7accd7cc09b832453c7e62/crowdsourcing/logout',
+        onSuccess: function () {
+          webStorage.local.clear()
+          vm.$router.push('/sign_in')
+        }
+      }
+    )
   }
 }

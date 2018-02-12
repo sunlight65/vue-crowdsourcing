@@ -32,7 +32,6 @@
 
 <script>
 import api from '@/assets/js/api'
-import webStorage from '@/assets/js/webStorage'
 
 export default {
   name: 'Profile',
@@ -65,23 +64,10 @@ export default {
         }
       )
     },
-
     logout () {
       const vm = this
 
-      api.post(
-        {
-          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/logout',
-          data: {
-            username: vm.username,
-            password: vm.password
-          },
-          onSuccess: function ({data}) {
-            webStorage.local.clear()
-            vm.$router.push('/sign_in')
-          }
-        }
-      )
+      api.logout(vm)
     }
   }
 }

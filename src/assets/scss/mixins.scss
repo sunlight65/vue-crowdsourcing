@@ -169,6 +169,7 @@
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 0.025rem;
+    cursor: pointer;
 
     &.primary {
       background-color: $mainForeColor;
