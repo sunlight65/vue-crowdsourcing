@@ -2,27 +2,27 @@
   <div class="container">
     <poster></poster>
     <div class="register-form">
-      <div class="title">{{ $t("msg.sign_up") }}</div>
-      <form class="main-content" @submit.prevent="submitWrap">
+      <div class="title">{{ $t("txt.sign_up") }}</div>
+      <el-form class="main-content" label-width="0.4rem" ref="registerForm" :model="formData" :rules="rules" @submit.native.prevent>
+        <el-form-item prop="username">
+          <div class="pre-icon iconfont icon-user"></div>
+          <el-input v-model="formData.username" :placeholder="$t('txt.email')" autofocus="autofocus"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <div class="pre-icon iconfont icon-lock"></div>
+          <el-input type="password" v-model="formData.password" :placeholder="$t('txt.password')"></el-input>
+        </el-form-item>
+        <el-form-item prop="confirmPass">
+          <div class="pre-icon iconfont icon-lock"></div>
+          <el-input type="password" v-model="formData.confirmPass" :placeholder="$t('txt.confirm_password')"></el-input>
+        </el-form-item>
         <div class="form-field">
-          <label class="iconfont icon-user" for="username"><span class="hidden">{{ $t('msg.username') }}</span></label>
-          <input name="username" type="text" class="form-input" :placeholder="$t('msg.email')" autofocus="autofocus">
+          <input type="submit" :value="lblSumbit($t('txt.registering'), $t('txt.sign_up'))"
+          class="btn primary" :disabled="isSubmitting" @click="preSumbit"/>
         </div>
-        <div class="form-field">
-          <label class="iconfont icon-lock" for="password"><span class="hidden">{{ $t('msg.password') }}</span></label>
-          <input name="password" type="password" class="form-input" :placeholder="$t('msg.password')">
-        </div>
-        <div class="form-field">
-          <label class="iconfont icon-lock" for="password-confirm"><span class="hidden">{{ $t('msg.password_confirm') }}</span></label>
-          <input name="password-confirm" type="password" class="form-input" :placeholder="$t('msg.password_confirm')">
-        </div>
-        <div class="form-field">
-          <input type="submit" :value="lblSumbit($t('msg.registering'), $t('msg.sign_up'))"
-          class="btn primary" :disabled="isSubmitting" />
-        </div>
-        <router-link :to="{ path: '/terms_of_service' }" class="terms-of-service">{{ $t("msg.terms_of_service") }}</router-link>
-        <router-link :to="{ path: '/sign_in' }" class="sign-in">{{ $t("msg.sign_in") }}</router-link>
-      </form>
+        <router-link :to="{ path: '/terms_of_service' }" class="terms-of-service">{{ $t("txt.terms_of_service") }}</router-link>
+        <router-link :to="{ path: '/sign_in' }" class="sign-in">{{ $t("txt.sign_in") }}</router-link>
+      </el-form>
     </div>
 </div>
 </template>
@@ -30,12 +30,66 @@
 <script>
 import formMixin from '@/assets/js/formMixin'
 import Poster from '@/components/Poster'
+import api from '@/assets/js/api'
 
 export default {
   name: 'Signup',
   mixins: [formMixin],
   components: {
     'poster': Poster
+  },
+  data () {
+    const vm = this
+
+    return {
+      formData: {
+        username: '',
+        password: '',
+        confirmPass: ''
+      },
+      rules: vm.getRulers()
+    }
+  },
+  methods: {
+    preSumbit: function (e) {
+      this.submitWrap(e, 'registerForm')
+    },
+    getRulers: function () {
+      const vm = this
+
+      return {
+        username: [
+          { required: true, message: vm.$t('msg.required', [vm.$t('txt.email')]), trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: vm.$t('msg.required', [vm.$t('txt.password')]), trigger: 'blur' }
+        ],
+        confirmPass: [
+          { required: true, message: vm.$t('msg.required', [vm.$t('txt.confirm_password')]), trigger: 'blur' }
+        ]
+      }
+    },
+    submit: function (e, postSumbit) {
+      const vm = this
+
+      api.post(
+        {
+          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/signin',
+          data: {
+            username: vm.formData.username,
+            password: vm.formData.password,
+            confirmPass: vm.formData.confirmPass
+          },
+          onSuccess: function ({data}) {
+            const msg = data.data.msg
+            if (msg) {
+              alert(msg)
+            }
+          },
+          onFinally: postSumbit
+        }
+      )
+    }
   }
 }
 </script>

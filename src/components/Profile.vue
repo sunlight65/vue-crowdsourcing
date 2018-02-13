@@ -7,23 +7,23 @@
           <div class="info-table">
             <div class="strong">{{ profile.userName }}</div>
             <div>{{ profile.email }}</div>
-            <div class="small">{{ $t("msg.last_login") + ' ' + profile.lastLoginTime }}</div>
+            <div class="small">{{ $t("txt.last_login") + ' ' + profile.lastLoginTime }}</div>
           </div>
         </div>
         <div class="btn-bar">
-          <router-link :to="{ path: '/profile/edit' }" class="btn primary">{{ $t("msg.edit_info") }}</router-link>
-          <router-link :to="{ path: '/profile/change_password' }" class="btn primary">{{ $t("msg.change_password") }}</router-link>
-          <a href="javascript:" class="btn primary" @click="logout">{{ $t("msg.sign_out") }}</a>
+          <router-link :to="{ path: '/profile/edit' }" class="btn primary">{{ $t("txt.edit_info") }}</router-link>
+          <router-link :to="{ path: '/profile/change_password' }" class="btn primary">{{ $t("txt.change_password") }}</router-link>
+          <a href="javascript:" class="btn primary" @click="logout">{{ $t("txt.sign_out") }}</a>
         </div>
       </div>
       <div class="auth-info">
-        <p class="iconfont icon-businesscard">{{ $t("msg.id_verification") }}</p>
-        <p class="iconfont icon-duigou">{{ $t("msg.email_verification") }}</p>
-        <p class="iconfont icon-duigou">{{ $t("msg.real_name_verification") }}</p>
+        <p class="iconfont icon-businesscard">{{ $t("txt.id_verification") }}</p>
+        <p class="iconfont icon-duigou">{{ $t("txt.email_verification") }}</p>
+        <p class="iconfont icon-duigou">{{ $t("txt.real_name_verification") }}</p>
       </div>
       <div class="security-info">
-        <p class="iconfont icon-security">{{ $t("msg.security_verification") }}</p>
-        <p class="iconfont icon-duigou">{{ $t("msg.mobile_verification") }}</p>
+        <p class="iconfont icon-security">{{ $t("txt.security_verification") }}</p>
+        <p class="iconfont icon-duigou">{{ $t("txt.mobile_verification") }}</p>
       </div>
     </div>
     <router-view class="sub-view"/>

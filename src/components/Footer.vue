@@ -1,6 +1,6 @@
 <template>
   <div class="page-footer">
-    <p class="copy-right">{{ $t("msg.copy_right") + ' © ' + year + ' ' + $t("msg.brand") }}</p>
+    <p class="copy-right">{{ $t("txt.copy_right") + ' © ' + year + ' ' + $t("txt.brand") }}</p>
   </div>
 </template>
 

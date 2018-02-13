@@ -1,9 +1,9 @@
 <template>
   <div class="profile-edit">
-    <div class="title">{{ $t("msg.modify_profile") }}</div>
+    <div class="title">{{ $t("txt.modify_profile") }}</div>
     <form class="main-content" @submit.prevent="submitWrap">
       <div class="form-field avater">
-        <div>{{ $t('msg.avater') }}</div>
+        <div>{{ $t('txt.avater') }}</div>
         <el-upload
           class="avatar-uploader"
           action="https://jsonplaceholder.typicode.com/posts/"
@@ -12,7 +12,7 @@
           :before-upload="beforeAvatarUpload">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-          <el-button size="small" type="primary">{{ $t('msg.select_file') }}</el-button>
+          <el-button size="small" type="primary">{{ $t('txt.select_file') }}</el-button>
           <div slot="tip" class="el-upload__tip">{{ $t('sentence.upload_tip') }}</div>
         </el-upload>
       </div>
@@ -29,9 +29,9 @@
         <input id="confirm_password" type="password" class="form-input" :placeholder="$t('sentence.confirm_password')">
       </div>
       <div class="form-field">
-        <input type="submit" :value="lblSumbit($t('msg.saving'), $t('msg.confirm_modify'))"
+        <input type="submit" :value="lblSumbit($t('txt.saving'), $t('txt.confirm_modify'))"
          class="btn primary" :disabled="isSubmitting" />
-        <router-link :to="{ path: '/profile' }" class="btn cancel">{{ $t("msg.cancel") }}</router-link>
+        <router-link :to="{ path: '/profile' }" class="btn cancel">{{ $t("txt.cancel") }}</router-link>
       </div>
     </form>
 </div>

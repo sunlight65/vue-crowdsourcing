@@ -133,12 +133,14 @@
       padding: 0.1rem;   
     }
 
-    & label {
-      background-color: #222222;
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
+    .pre-icon {
+      position: absolute;
+      border-bottom-left-radius: 0.025rem;
+      border-top-left-radius: 0.025rem;
       padding-left: 0.125rem;
       padding-right: 0.125rem;
+      left: -0.4rem;
+      background-color: #222222;
     }
 
     & input[type="text"], input[type="password"] {
@@ -165,7 +167,7 @@
   $activeForeColor: #197071;
 
   .btn {
-    padding: 0.05rem 0.1rem;
+    padding: 0.1rem;
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 0.025rem;

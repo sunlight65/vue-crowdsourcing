@@ -1,6 +1,6 @@
 <template>
   <div class="change-password">
-    <div class="title">{{ $t("msg.change_password") }}</div>
+    <div class="title">{{ $t("txt.change_password") }}</div>
     <form class="main-content" @submit.prevent="submitWrap">
       <div class="form-field">
         <label class="iconfont icon-user" for="old_password"></label>
@@ -15,9 +15,9 @@
         <input id="confirm_password" type="password" class="form-input" :placeholder="$t('sentence.confirm_password')">
       </div>
       <div class="form-field">
-        <input type="submit" :value="lblSumbit($t('msg.saving'), $t('msg.confirm_modify'))"
+        <input type="submit" :value="lblSumbit($t('txt.saving'), $t('txt.confirm_modify'))"
          class="btn primary" :disabled="isSubmitting" />
-        <router-link :to="{ path: '/profile' }" class="btn cancel">{{ $t("msg.cancel") }}</router-link>
+        <router-link :to="{ path: '/profile' }" class="btn cancel">{{ $t("txt.cancel") }}</router-link>
       </div>
     </form>
 </div>

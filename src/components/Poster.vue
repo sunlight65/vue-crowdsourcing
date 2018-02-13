@@ -13,7 +13,9 @@ export default {
 .poster {
   width: 3rem;
   height: 4.2rem;
+  line-height: 4.2rem;
   background:rgba(121, 121, 121, 0.5);
+  text-align: center;
 
   @include if_mobile() {
     display: none;

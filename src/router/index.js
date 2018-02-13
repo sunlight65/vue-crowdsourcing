@@ -8,6 +8,7 @@ import Profile from '@/components/Profile'
 import ProfileDetail from '@/components/ProfileDetail'
 import ProfileEdit from '@/components/ProfileEdit'
 import ChangePassword from '@/components/ChangePassword'
+import ResetPassword from '@/components/ResetPassword'
 import messages from '@/assets/js/messages'
 
 Vue.use(Router)
@@ -27,28 +28,35 @@ export default new Router({
       path: '/sign_in',
       component: Signin,
       meta: {
-        title: $(messages.cn.msg.sign_in)
+        title: $(messages.cn.txt.sign_in)
       }
     },
     {
       path: '/sign_up',
       component: Signup,
       meta: {
-        title: $(messages.cn.msg.sign_up)
+        title: $(messages.cn.txt.sign_up)
       }
     },
     {
       path: '/forgot_password',
       component: ForgotPassword,
       meta: {
-        title: $(messages.cn.msg.forgot_password)
+        title: $(messages.cn.txt.forgot_password)
+      }
+    },
+    {
+      path: '/reset_password',
+      component: ResetPassword,
+      meta: {
+        title: $(messages.cn.txt.reset_password)
       }
     },
     {
       path: '/profile',
       component: Profile,
       meta: {
-        title: $(messages.cn.msg.my_account)
+        title: $(messages.cn.txt.my_account)
       },
       children: [
         {

@@ -1,12 +1,12 @@
 <template>
   <div class="page-header">
-    <router-link class="title strong" :to="{ path: '/' }">{{ $t("msg.brand") }}</router-link>
+    <router-link class="title strong" :to="{ path: '/' }">{{ $t("txt.brand") }}</router-link>
     <ul :class="{ 'nav-menu': true, 'pop': isVerticalBurger }">
       <li>menu1</li>
       <li>menu2</li>
       <li class="sign-in-up" v-if="!isLogined">
-        <router-link :to="{ path: '/sign_in' }" class="sign-in btn frame-fake" @click.native="toggleBurger()">{{ $t("msg.sign_in") }}</router-link>
-        <router-link :to="{ path: '/sign_up' }" class="sign-up btn frame" @click.native="toggleBurger()">{{ $t("msg.sign_up") }}</router-link>
+        <router-link :to="{ path: '/sign_in' }" class="sign-in btn frame-fake" @click.native="toggleBurger()">{{ $t("txt.sign_in") }}</router-link>
+        <router-link :to="{ path: '/sign_up' }" class="sign-up btn frame" @click.native="toggleBurger()">{{ $t("txt.sign_up") }}</router-link>
       </li>
       <li class="avater-dropdown" v-if="isLogined">
         <el-dropdown id="avater-dropdown-container" @command="handleCommand">
@@ -16,9 +16,9 @@
           </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>
-              <router-link :to="{ path: '/profile' }">{{ $t("msg.my_account") }}</router-link>
+              <router-link :to="{ path: '/profile' }">{{ $t("txt.my_account") }}</router-link>
             </el-dropdown-item>
-            <el-dropdown-item divided command="logout">{{ $t("msg.sign_out") }}</el-dropdown-item>
+            <el-dropdown-item divided command="logout">{{ $t("txt.sign_out") }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </li>

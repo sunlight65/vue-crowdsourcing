@@ -5,27 +5,35 @@ export default {
     }
   },
   methods: {
-    submitWrap (e) {
+    submitWrap (e, formRef) {
       const vm = this
-      vm.isSubmitting = true
 
-      if (vm.submit) {
-        const p = new Promise(
-          function (resolve, reject) {
-            vm.submit(e, function () {
-              resolve()
-            }, function (status) {
-              reject(status)
+      vm.$refs[formRef].validate((valid) => {
+        if (valid) {
+          vm.isSubmitting = true
+
+          if (vm.submit) {
+            const p = new Promise(
+              function (resolve, reject) {
+                vm.submit(e, function () {
+                  resolve()
+                }, function (status) {
+                  reject(status)
+                })
+              }
+            )
+
+            p.then(function () {
+              vm.isSubmitting = false
+            }).catch(function (status) {
+              vm.isSubmitting = false
             })
           }
-        )
-
-        p.then(function () {
-          vm.isSubmitting = false
-        }).catch(function (status) {
-          vm.isSubmitting = false
-        })
-      }
+        } else {
+          console.log('valid fail!')
+          return false
+        }
+      })
     },
     lblSumbit (lblSubmitting, lblDefault) {
       const vm = this

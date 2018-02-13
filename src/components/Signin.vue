@@ -2,23 +2,23 @@
   <div class="container">
     <poster></poster>
     <div class="login-form">
-      <div class="title">{{ $t("msg.sign_in") }}</div>
-      <form class="main-content" @submit.prevent="submitWrap">
+      <div class="title">{{ $t("txt.sign_in") }}</div>
+      <el-form class="main-content" label-width="0.4rem" ref="signinForm" :model="formData" :rules="rules" @submit.native.prevent>
+        <el-form-item prop="username">
+          <div class="pre-icon iconfont icon-user"></div>
+          <el-input v-model="formData.username" :placeholder="$t('txt.email')" autofocus="autofocus"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <div class="pre-icon iconfont icon-lock"></div>
+          <el-input type="password" v-model="formData.password" :placeholder="$t('txt.password')"></el-input>
+        </el-form-item>
         <div class="form-field">
-          <label class="iconfont icon-user" for="username"><span class="hidden">{{ $t('msg.username') }}</span></label>
-          <input name="username" type="text" class="form-input" :placeholder="$t('msg.email')" v-model="username" autofocus="autofocus">
+          <input type="submit" :value="lblSumbit($t('txt.logining'), $t('txt.sign_in'))"
+          class="btn primary" :disabled="isSubmitting"  @click="preSumbit"/>
         </div>
-        <div class="form-field">
-          <label class="iconfont icon-lock" for="password"><span class="hidden">{{ $t('msg.password') }}</span></label>
-          <input name="password" type="password" class="form-input" :placeholder="$t('msg.password')" v-model="password">
-        </div>
-        <div class="form-field">
-          <input type="submit" :value="lblSumbit($t('msg.logining'), $t('msg.sign_in'))"
-          class="btn primary" :disabled="isSubmitting" />
-        </div>
-        <router-link :to="{ path: '/forgot_password' }" class="forgot-password">{{ $t("msg.forgot_password") }}</router-link>
-        <router-link :to="{ path: '/sign_up' }" class="sign-up">{{ $t("msg.sign_up") }}</router-link>
-      </form>
+        <router-link :to="{ path: '/forgot_password' }" class="forgot-password">{{ $t("txt.forgot_password") }}</router-link>
+        <router-link :to="{ path: '/sign_up' }" class="sign-up">{{ $t("txt.sign_up") }}</router-link>
+      </el-form>
     </div>
 </div>
 </template>
@@ -37,11 +37,29 @@ export default {
   },
   data () {
     return {
-      username: '',
-      password: ''
+      formData: {
+        username: '',
+        password: ''
+      },
+      rules: this.getRulers()
     }
   },
   methods: {
+    preSumbit: function (e) {
+      this.submitWrap(e, 'signinForm')
+    },
+    getRulers: function () {
+      const vm = this
+
+      return {
+        username: [
+          { required: true, message: vm.$t('msg.required', [vm.$t('txt.email')]), trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: vm.$t('msg.required', [vm.$t('txt.password')]), trigger: 'blur' }
+        ]
+      }
+    },
     submit: function (e, postSumbit) {
       const vm = this
 
@@ -49,8 +67,8 @@ export default {
         {
           url: '/5a7accd7cc09b832453c7e62/crowdsourcing/login',
           data: {
-            username: vm.username,
-            password: vm.password
+            username: vm.formData.username,
+            password: vm.formData.password
           },
           onSuccess: function ({data}) {
             const tk = data.data.tk
