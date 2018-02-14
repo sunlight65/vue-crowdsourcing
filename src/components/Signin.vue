@@ -3,7 +3,7 @@
     <poster></poster>
     <div class="login-form">
       <div class="title">{{ $t("txt.sign_in") }}</div>
-      <el-form class="main-content" label-width="0.4rem" ref="signinForm" :model="formData" :rules="rules" @submit.native.prevent>
+      <el-form class="main-content" label-width="0.4rem" ref="form" :model="formData" :rules="rules" @submit.native.prevent>
         <el-form-item prop="username">
           <div class="pre-icon iconfont icon-user"></div>
           <el-input v-model="formData.username" :placeholder="$t('txt.email')" autofocus="autofocus"></el-input>
@@ -14,7 +14,7 @@
         </el-form-item>
         <div class="form-field">
           <input type="submit" :value="lblSumbit($t('txt.logining'), $t('txt.sign_in'))"
-          class="btn primary" :disabled="isSubmitting"  @click="preSumbit"/>
+          class="btn primary" :disabled="isSubmitting" @click="preSumbit"/>
         </div>
         <router-link :to="{ path: '/forgot_password' }" class="forgot-password">{{ $t("txt.forgot_password") }}</router-link>
         <router-link :to="{ path: '/sign_up' }" class="sign-up">{{ $t("txt.sign_up") }}</router-link>
@@ -36,22 +36,14 @@ export default {
     'poster': Poster
   },
   data () {
+    const vm = this
+
     return {
       formData: {
         username: '',
         password: ''
       },
-      rules: this.getRulers()
-    }
-  },
-  methods: {
-    preSumbit: function (e) {
-      this.submitWrap(e, 'signinForm')
-    },
-    getRulers: function () {
-      const vm = this
-
-      return {
+      rules: {
         username: [
           { required: true, message: vm.$t('msg.required', [vm.$t('txt.email')]), trigger: 'blur' }
         ],
@@ -59,6 +51,11 @@ export default {
           { required: true, message: vm.$t('msg.required', [vm.$t('txt.password')]), trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    preSumbit: function (e) {
+      this.submitWrap(e, 'form')
     },
     submit: function (e, postSumbit) {
       const vm = this
@@ -71,10 +68,18 @@ export default {
             password: vm.formData.password
           },
           onSuccess: function ({data}) {
+            const isSuccess = data.susccess
+            const msg = data.data.msg
             const tk = data.data.tk
-            if (tk) {
+            if (isSuccess && tk) {
               webStorage.local.set(webStorage.local.KEY.tk, tk)
               vm.$router.push('/profile')
+            } else {
+              vm.$message({
+                showClose: true,
+                message: msg,
+                type: 'error'
+              })
             }
           },
           onFinally: postSumbit

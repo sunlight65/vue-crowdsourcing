@@ -1,12 +1,14 @@
 export default {
-  required: (rule, value, callback) => {
-    if (value === '') {
-      callback(new Error('请输入密码'))
-    } else {
-      if (this.ruleForm2.checkPass !== '') {
-        this.$refs.ruleForm2.validateField('checkPass')
+  beforeCreate: function () {
+    const vm = this
+    this.validators = {
+      equalTo: (rule, value, callback) => {
+        if (rule.compareTo && value && value === vm.formData[rule.compareTo]) {
+          callback()
+        } else {
+          callback(new Error(vm.$t('msg.equal_to', [vm.$t('txt.password')])))
+        }
       }
-      callback()
     }
   }
 }

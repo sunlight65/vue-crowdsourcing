@@ -3,18 +3,18 @@
     <poster></poster>
     <div class="forgot-password-form">
       <div class="title">{{ $t("txt.forgot_password") }}</div>
-      <form class="main-content" @submit.prevent="submitWrap">
-        <div class="form-field">
-          <label class="iconfont icon-user" for="email"><span class="hidden">{{ $t('txt.username') }}</span></label>
-          <input name="email" type="text" class="form-input" :placeholder="$t('txt.email')" autofocus="autofocus">
-        </div>
+      <el-form class="main-content" label-width="0.4rem" ref="form" :model="formData" :rules="rules" @submit.native.prevent>
+        <el-form-item prop="email">
+          <div class="pre-icon iconfont icon-user"></div>
+          <el-input v-model="formData.email" :placeholder="$t('txt.email')" autofocus="autofocus"></el-input>
+        </el-form-item>
         <div class="form-field">
           <input type="submit" :value="lblSumbit($t('txt.resetting'), $t('txt.reset_password'))"
-          class="btn primary" :disabled="isSubmitting" />
+          class="btn primary" :disabled="isSubmitting" @click="preSumbit" />
         </div>
         <router-link :to="{ path: '/sign_in' }" class="sign-in">{{ $t("txt.sign_in") }}</router-link>
         <router-link :to="{ path: '/sign_up' }" class="sign-up">{{ $t("txt.sign_up") }}</router-link>
-      </form>
+      </el-form>
     </div>
 </div>
 </template>
@@ -22,12 +22,59 @@
 <script>
 import formMixin from '@/assets/js/formMixin'
 import Poster from '@/components/Poster'
+import api from '@/assets/js/api'
 
 export default {
   name: 'ForgotPassword',
   mixins: [formMixin],
   components: {
     'poster': Poster
+  },
+  data () {
+    const vm = this
+
+    return {
+      formData: {
+        email: ''
+      },
+      rules: {
+        email: [
+          { required: true, message: vm.$t('msg.required', [vm.$t('txt.email')]), trigger: 'blur' },
+          { type: 'email', message: vm.$t('msg.email'), trigger: 'blur,change' }
+        ]
+      }
+    }
+  },
+  methods: {
+    preSumbit: function (e) {
+      this.submitWrap(e, 'form')
+    },
+    submit: function (e, postSumbit) {
+      const vm = this
+
+      api.post(
+        {
+          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/forget_password',
+          data: {
+            email: vm.formData.email
+          },
+          onSuccess: function ({data}) {
+            const isSuccess = data.susccess
+            const msg = data.data.msg
+            if (isSuccess) {
+              vm.$router.push('/reset_password')
+            } else {
+              vm.$message({
+                showClose: true,
+                message: msg,
+                type: 'error'
+              })
+            }
+          },
+          onFinally: postSumbit
+        }
+      )
+    }
   }
 }
 </script>

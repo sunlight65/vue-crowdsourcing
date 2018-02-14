@@ -43,10 +43,13 @@ const messages = {
       new_password: '请输入你的新密码',
       confirm_password: '请再次输入你的新密码',
       verified_lock_change: '一旦通过验证，不能修改',
-      upload_tip: '只能上传jpg/png文件，且不超过500kb'
+      upload_tip: '只能上传jpg/png文件，且不超过500kb',
+      change_pass_success: '密码修改成功'
     },
     msg: {
-      required: '请输入{0}'
+      required: '请输入{0}',
+      equal_to: '两次输入的{0}不一致',
+      email: '请输入正确的邮箱地址'
     }
   }
 }

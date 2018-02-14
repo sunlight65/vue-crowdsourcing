@@ -3,7 +3,7 @@
     <poster></poster>
     <div class="register-form">
       <div class="title">{{ $t("txt.sign_up") }}</div>
-      <el-form class="main-content" label-width="0.4rem" ref="registerForm" :model="formData" :rules="rules" @submit.native.prevent>
+      <el-form class="main-content" label-width="0.4rem" ref="form" :model="formData" :rules="rules" @submit.native.prevent>
         <el-form-item prop="username">
           <div class="pre-icon iconfont icon-user"></div>
           <el-input v-model="formData.username" :placeholder="$t('txt.email')" autofocus="autofocus"></el-input>
@@ -31,10 +31,12 @@
 import formMixin from '@/assets/js/formMixin'
 import Poster from '@/components/Poster'
 import api from '@/assets/js/api'
+import validators from '@/assets/js/validators'
+import webStorage from '@/assets/js/webStorage'
 
 export default {
   name: 'Signup',
-  mixins: [formMixin],
+  mixins: [formMixin, validators],
   components: {
     'poster': Poster
   },
@@ -47,17 +49,7 @@ export default {
         password: '',
         confirmPass: ''
       },
-      rules: vm.getRulers()
-    }
-  },
-  methods: {
-    preSumbit: function (e) {
-      this.submitWrap(e, 'registerForm')
-    },
-    getRulers: function () {
-      const vm = this
-
-      return {
+      rules: {
         username: [
           { required: true, message: vm.$t('msg.required', [vm.$t('txt.email')]), trigger: 'blur' }
         ],
@@ -65,9 +57,15 @@ export default {
           { required: true, message: vm.$t('msg.required', [vm.$t('txt.password')]), trigger: 'blur' }
         ],
         confirmPass: [
-          { required: true, message: vm.$t('msg.required', [vm.$t('txt.confirm_password')]), trigger: 'blur' }
+          { required: true, message: vm.$t('msg.required', [vm.$t('txt.confirm_password')]), trigger: 'blur' },
+          { validator: vm.validators.equalTo, compareTo: 'password', trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    preSumbit: function (e) {
+      this.submitWrap(e, 'form')
     },
     submit: function (e, postSumbit) {
       const vm = this
@@ -81,9 +79,18 @@ export default {
             confirmPass: vm.formData.confirmPass
           },
           onSuccess: function ({data}) {
+            const isSuccess = data.susccess
             const msg = data.data.msg
-            if (msg) {
-              alert(msg)
+            const tk = data.data.tk
+            if (isSuccess && tk) {
+              webStorage.local.set(webStorage.local.KEY.tk, tk)
+              vm.$router.push('/profile')
+            } else {
+              vm.$message({
+                showClose: true,
+                message: msg,
+                type: 'error'
+              })
             }
           },
           onFinally: postSumbit
