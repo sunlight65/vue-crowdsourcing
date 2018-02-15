@@ -36,7 +36,9 @@ const messages = {
       select_file: '选择文件',
       no_file_selected: '未选择任何文件',
       phone_num: '手机号码',
-      language: '语言'
+      language: '语言',
+      chinese: '中文',
+      english: '英文'
     },
     sentence: {
       old_password: '请输入你原先的密码',
@@ -49,7 +51,64 @@ const messages = {
     msg: {
       required: '请输入{0}',
       equal_to: '两次输入的{0}不一致',
-      email: '请输入正确的邮箱地址'
+      email: '请输入正确的邮箱地址',
+      change_saved: '更新已保持'
+    }
+  },
+  en: {
+    txt: {
+      brand: 'TAOTAOTC',
+      username: 'username',
+      password: 'password',
+      email: 'email',
+      sign_in: 'signin',
+      sign_up: 'signup',
+      sign_out: 'signout',
+      submit: 'submit',
+      forgot_password: 'forgot password',
+      confirm_password: 'confirm passord',
+      terms_of_service: 'terms of service',
+      reset_password: 'reset password',
+      copy_right: 'copy right',
+      logining: 'signin...',
+      registering: 'signup...',
+      resetting: 'resetting...',
+      saving: 'saving...',
+      submitting: 'submitting...',
+      edit_info: 'edit info',
+      change_password: 'change password',
+      id_verification: 'ID verification',
+      email_verification: 'email verification',
+      real_name_verification: 'real name verification',
+      my_account: 'my account',
+      last_login: 'last login time',
+      security_verification: 'security verification',
+      mobile_verification: 'mobile verification',
+      confirm_modify: 'confirm modify',
+      cancel: 'cancel',
+      modify_profile: 'modify profile',
+      avater: 'avater',
+      upload_new_avater: 'upload new avater',
+      select_file: 'select file',
+      no_file_selected: 'no file selected',
+      phone_num: 'cellphone',
+      language: 'language',
+      chinese: 'Chinese',
+      english: 'English'
+    },
+    sentence: {
+      old_password: 'please input your password',
+      new_password: 'please input your new password',
+      confirm_password: 'please input your new password again',
+      verified_lock_change: 'lock change once verified',
+      upload_tip: 'only jpg/png file，with size limits in 500kb',
+      change_pass_success: 'password saving success'
+    },
+    msg: {
+      required: 'please input {0}',
+      equal_to: '{0} is not the same',
+      email: 'not an email',
+      change_saved: 'change have been saved'
     }
   }
 }

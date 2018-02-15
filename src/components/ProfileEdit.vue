@@ -1,7 +1,7 @@
 <template>
   <div class="profile-edit">
     <div class="title">{{ $t("txt.modify_profile") }}</div>
-    <form class="main-content" @submit.prevent="submitWrap">
+    <el-form class="main-content" label-position="top" ref="form" :model="formData" :rules="rules" @submit.native.prevent>
       <div class="form-field avater">
         <div>{{ $t('txt.avater') }}</div>
         <el-upload
@@ -10,47 +10,95 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <img v-if="formData.imageUrl" :src="formData.imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           <el-button size="small" type="primary">{{ $t('txt.select_file') }}</el-button>
           <div slot="tip" class="el-upload__tip">{{ $t('sentence.upload_tip') }}</div>
         </el-upload>
       </div>
-      <div class="form-field">
-        <label class="iconfont icon-lock" for="old_password"></label>
-        <input name="old_password" type="password" class="form-input" :placeholder="$t('sentence.old_password')" autofocus="autofocus">
-      </div>
-      <div class="form-field">
-        <label class="iconfont icon-lock" for="new_password"></label>
-        <input name="new_password" type="password" class="form-input" :placeholder="$t('sentence.new_password')">
-      </div>
-      <div class="form-field">
-        <label class="iconfont icon-lock" for="confirm_password"></label>
-        <input id="confirm_password" type="password" class="form-input" :placeholder="$t('sentence.confirm_password')">
-      </div>
+      <el-form-item :label="$t('txt.username')" prop="username">
+        <el-input v-model="formData.username" :placeholder="$t('txt.username')"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('txt.phone_num')" prop="cellphone">
+        <el-input v-model="formData.cellphone" :placeholder="$t('txt.phone_num')"></el-input>
+      </el-form-item>
+      <el-form-item :label="$t('txt.language')">
+        <el-select v-model="formData.language">
+          <el-option :label="$t('txt.chinese')" value="cn"></el-option>
+          <el-option :label="$t('txt.english')" value="en"></el-option>
+        </el-select>
+      </el-form-item>
       <div class="form-field">
         <input type="submit" :value="lblSumbit($t('txt.saving'), $t('txt.confirm_modify'))"
-         class="btn primary" :disabled="isSubmitting" />
+         class="btn primary" :disabled="isSubmitting" @click="preSumbit" />
         <router-link :to="{ path: '/profile' }" class="btn cancel">{{ $t("txt.cancel") }}</router-link>
       </div>
-    </form>
+    </el-form>
 </div>
 </template>
 
 <script>
 import formMixin from '@/assets/js/formMixin'
+import api from '@/assets/js/api'
+import webStorage from '@/assets/js/webStorage'
 
 export default {
   name: 'ProfileEdit',
   mixins: [formMixin],
   data () {
+    const vm = this
+    const lang = webStorage.local.get(webStorage.local.KEY.lang)
+
     return {
-      imageUrl: '/static/img/user_default_pic.png'
+      formData: {
+        imageUrl: '/static/img/user_default_pic.png',
+        username: '',
+        cellphone: '',
+        language: lang || 'cn'
+      },
+      rules: {
+        username: [
+          { required: true, message: vm.$t('msg.required', [vm.$t('txt.username')]), trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
+    preSumbit: function (e) {
+      this.submitWrap(e, 'form')
+    },
+    submit: function (e, postSumbit) {
+      const vm = this
+
+      api.post(
+        {
+          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/success',
+          data: {
+            imageUrl: '/static/img/user_default_pic.png',
+            username: vm.formData.username,
+            cellphone: vm.formData.cellphone,
+            language: vm.formData.language
+          },
+          onSuccess: function ({data}) {
+            const isSuccess = data.susccess
+            const msg = data.data.msg
+            if (isSuccess) {
+              vm.$message.success(vm.$t('msg.change_saved'))
+              vm.$router.push('/profile')
+            } else {
+              vm.$message({
+                showClose: true,
+                message: msg,
+                type: 'error'
+              })
+            }
+          },
+          onFinally: postSumbit
+        }
+      )
+    },
     handleAvatarSuccess (res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw)
+      this.formData.imageUrl = URL.createObjectURL(file.raw)
     },
     beforeAvatarUpload (file) {
       const isJPG = file.type === 'image/jpeg'
@@ -63,6 +111,12 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!')
       }
       return isJPG && isLt2M
+    }
+  },
+  watch: {
+    'formData.language': function (val, oldVal) {
+      this.$root.$i18n.locale = val
+      webStorage.local.set(webStorage.local.KEY.lang, val)
     }
   }
 }

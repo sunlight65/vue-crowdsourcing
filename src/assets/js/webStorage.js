@@ -1,7 +1,8 @@
 export default {
   local: {
     KEY: {
-      tk: 'tk'
+      tk: 'tk',
+      lang: 'lang'
     },
     get: function (key) {
       return window.localStorage.getItem(key)

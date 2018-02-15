@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-detail"></div>
+  <div class="profile-detail">账户详情</div>
 </template>
 
 <script>
@@ -13,6 +13,8 @@ export default {
 .profile-detail {
   width: 5rem;
   height: 5rem;
+  line-height: 5rem;
+  text-align: center;
   background:rgba(121, 121, 121, 0.5);
 
   @include if_mobile() {

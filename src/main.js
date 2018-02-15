@@ -6,6 +6,7 @@ import ElementUI from 'element-ui'
 import App from '@/App'
 import router from '@/router'
 import messages from '@/assets/js/messages'
+import webStorage from '@/assets/js/webStorage'
 import '@/assets/scss/element-variables.scss'
 
 Vue.config.productionTip = false
@@ -13,8 +14,9 @@ Vue.config.productionTip = false
 Vue.use(VueI18n)
 Vue.use(ElementUI)
 
+const lang = webStorage.local.get(webStorage.local.KEY.lang)
 const i18n = new VueI18n({
-  locale: 'cn',
+  locale: lang || 'cn',
   messages
 })
 
