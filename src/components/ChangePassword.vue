@@ -109,6 +109,7 @@ export default {
     font-size: 0.2rem;
     padding: 0 0.2rem;
     margin:0;
+    text-transform: capitalize;
   }
 
   .main-content {

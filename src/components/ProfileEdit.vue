@@ -1,7 +1,7 @@
 <template>
   <div class="profile-edit">
     <div class="title">{{ $t("txt.modify_profile") }}</div>
-    <el-form class="main-content" label-position="top" ref="form" :model="formData" :rules="rules" @submit.native.prevent>
+    <el-form class="main-content capitalize" label-position="top" ref="form" :model="formData" :rules="rules" @submit.native.prevent>
       <div class="form-field avater">
         <div>{{ $t('txt.avater') }}</div>
         <el-upload
@@ -136,6 +136,7 @@ export default {
     font-size: 0.2rem;
     padding: 0 0.2rem;
     margin:0;
+    text-transform: capitalize;
   }
 
   .main-content {

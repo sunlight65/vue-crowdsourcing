@@ -130,6 +130,7 @@ export default {
   text-align: center;
   padding: 0.2rem 0.2rem 0;
   margin:0;
+  text-transform: capitalize;
 }
 
 .main-content {

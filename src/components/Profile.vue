@@ -11,7 +11,7 @@
           </div>
         </div>
         <div class="btn-bar">
-          <router-link :to="{ path: '/profile/edit' }" class="btn primary">{{ $t("txt.edit_info") }}</router-link>
+          <router-link :to="{ path: '/profile/edit' }" class="btn primary">{{ $t("txt.profile_settings") }}</router-link>
           <router-link :to="{ path: '/profile/change_password' }" class="btn primary">{{ $t("txt.change_password") }}</router-link>
           <a href="javascript:" class="btn primary" @click="logout">{{ $t("txt.sign_out") }}</a>
         </div>
@@ -19,11 +19,11 @@
       <div class="auth-info">
         <p class="iconfont icon-businesscard">{{ $t("txt.id_verification") }}</p>
         <p class="iconfont icon-duigou">{{ $t("txt.email_verification") }}</p>
-        <p class="iconfont icon-duigou">{{ $t("txt.real_name_verification") }}</p>
+        <p class="iconfont icon-duigou">{{ $t("txt.advanced_verification") }}</p>
       </div>
       <div class="security-info">
         <p class="iconfont icon-security">{{ $t("txt.security_verification") }}</p>
-        <p class="iconfont icon-duigou">{{ $t("txt.mobile_verification") }}</p>
+        <p class="iconfont icon-duigou">{{ $t("txt.phone_verification") }}</p>
       </div>
     </div>
     <router-view class="sub-view"/>
@@ -84,9 +84,9 @@ export default {
 }
 
 .profile {
-  width: 3.4rem;
+  min-width: 3.45rem;
   @include if_mobile() {
-    width: 100%;
+    min-width: 100%;
   }
 }
 
@@ -129,7 +129,8 @@ export default {
   padding: 0.2rem 0;
 
   .btn {
-    margin: 0 0.02rem;
+    margin: 0.02rem;
+    display: inline-block;
   }
 }
 
