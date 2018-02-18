@@ -1,28 +1,24 @@
 <template>
   <div class="page-header">
     <router-link class="title strong" :to="{ path: '/' }">{{ $t("txt.brand") }}</router-link>
-    <ul :class="{ 'nav-menu': true, 'pop': isVerticalBurger }">
-      <li>menu1</li>
-      <li>menu2</li>
-      <li class="sign-in-up" v-if="!isLogined">
+    <el-menu :class="{ 'nav-menu': true, 'pop': isVerticalBurger }" background-color="#616161" @select="handleSelect">
+      <el-menu-item index="1">menu1</el-menu-item>
+      <el-menu-item index="2">menu2</el-menu-item>
+      <el-menu-item index="3">menu3</el-menu-item>
+      <el-menu-item index="4" class="sign-in-up" v-if="!isLogined">
         <router-link :to="{ path: '/sign_in' }" class="sign-in btn frame-fake" @click.native="toggleBurger()">{{ $t("txt.sign_in") }}</router-link>
         <router-link :to="{ path: '/sign_up' }" class="sign-up btn frame" @click.native="toggleBurger()">{{ $t("txt.sign_up") }}</router-link>
-      </li>
-      <li class="avater-dropdown" v-if="isLogined">
-        <el-dropdown id="avater-dropdown-container" @command="handleCommand">
-          <div>
-            <img class="avater-dropdown-link" src="/static/img/user_default_pic.png" alt="User pic">
-            <i class="el-icon-arrow-down el-icon--right"></i>
-          </div>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>
-              <router-link :to="{ path: '/profile' }">{{ $t("txt.my_account") }}</router-link>
-            </el-dropdown-item>
-            <el-dropdown-item divided command="logout">{{ $t("txt.sign_out") }}</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </li>
-    </ul>
+      </el-menu-item>
+      <el-submenu index="4" class="avater-dropdown" v-if="isLogined">
+        <template slot="title">
+          <img class="avater-dropdown-link" src="/static/img/user_default_pic.png" alt="User pic">
+        </template>
+        <el-menu-item index="4-1">
+          <router-link :to="{ path: '/profile' }">{{ $t("txt.my_account") }}</router-link>
+        </el-menu-item>
+        <el-menu-item index="4-2">{{ $t('txt.sign_out') }}</el-menu-item>
+      </el-submenu>
+    </el-menu>
     <div :class="{ 'iconfont icon-view-list burger': true, 'clockwise': isVerticalBurger }" @click="toggleBurger()"></div>
   </div>
 </template>
@@ -57,7 +53,7 @@ export default {
       const unauthPagePath = [ '/sign_in', '/sign_up', '/forgot_password' ]
       const toPath = to.fullPath.split('?')[0]
       const ret = unauthPagePath.find((value, index, arr) => {
-        return value === toPath
+        return toPath.indexOf(value) === 0
       })
       if (ret) {
         vm.isLogined = false
@@ -65,8 +61,8 @@ export default {
         vm.isLogined = true
       }
     },
-    handleCommand (cmd) {
-      if (cmd === 'logout') {
+    handleSelect (key, keyPath) {
+      if (key === '4-2') {
         api.logout(this)
       }
     }
@@ -96,9 +92,10 @@ $headerHeight: 0.5rem;
 
 .nav-menu {
   flex-grow: 1;
+  border-bottom: none;
 
   @include if_mobile() {
-    width: 2rem;
+    width: 1.2rem;
     flex-grow: 0;
     position: absolute;
     left: 0;
@@ -107,6 +104,7 @@ $headerHeight: 0.5rem;
     opacity: 0;
     visibility:hidden;
     background-color: #2b2b2b;
+    z-index: 10;
 
     &.pop {
       opacity: 1;
@@ -116,10 +114,12 @@ $headerHeight: 0.5rem;
 
   li {
     float: left;
-    padding: 0.05rem 0.1rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
     font-weight: bold;
     border-left: 1px solid #797979;
     cursor: pointer;
+    color: #ddd;
 
     &:hover {
       color: $fontHoverColor;
@@ -137,7 +137,9 @@ $headerHeight: 0.5rem;
 
       & a {
         padding: 0 0.05rem;
-        margin: 0 0.02rem;
+        margin: 0.1rem 0.02rem;
+        line-height: 0.3rem;
+        height: 0.3rem;
       }
 
       @include if_mobile() {
@@ -147,8 +149,12 @@ $headerHeight: 0.5rem;
 
     &.avater-dropdown {
       float: right;
-      width: 0.6rem;
+      width: 0.9rem;
       border-left: none;
+
+      li {
+        width: 100%;
+      }
 
       @include if_mobile() {
         float: none;
@@ -183,29 +189,33 @@ $headerHeight: 0.5rem;
   }
 }
 
-#avater-dropdown-container {
-  width: 0.6rem;
-  position: absolute;
-  top: 50%;
-  margin-top: -0.2rem;
+.avater-dropdown-link {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 0.2rem;
+}
+</style>
 
-  @include if_mobile() {
-    position: relative;
+<style lang="scss">
+.nav-menu {
+  .el-submenu__title {
+    height: 0.5rem;
+    line-height: 0.5rem;
   }
 
-  .avater-dropdown-link {
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 0.2rem;
-  }
+  .avater-dropdown {
+    .el-menu {
+      margin-left: -0.4rem;
 
-  .el-icon-arrow-down {
-    color: #fff;
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    margin-top: -0.08rem;
-    right: 0;
+      @include if_mobile() {
+          margin-left: 0;
+      }
+    }
+
+    .el-submenu__icon-arrow {
+      left: 0.65rem;
+      right: auto;
+    }
   }
 }
 </style>

@@ -111,7 +111,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 4rem;
-  background:rgba(58,63,68,0.5);
+  background:#efeeee;
 
   @include if_mobile() {
     width: 100%;

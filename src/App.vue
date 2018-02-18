@@ -5,18 +5,21 @@
         <router-view/>
       </keep-alive>
     <page-footer></page-footer>
+    <mobile-bottom-nav></mobile-bottom-nav>
   </div>
 </template>
 
 <script>
 import PageHeader from '@/components/Header'
 import PageFooter from '@/components/Footer'
+import MobileBottomNav from '@/components/MobileBottomNav'
 
 export default {
   name: 'App',
   components: {
     'page-header': PageHeader,
-    'page-footer': PageFooter
+    'page-footer': PageFooter,
+    'mobile-bottom-nav': MobileBottomNav
   }
 }
 </script>

@@ -162,6 +162,12 @@
       display: flex;
       margin-bottom: 0.2rem;
     }
+
+    .el-select {
+      @include if_mobile() {
+        width: 100%;
+      }
+    }
   }
 }
 
@@ -232,6 +238,10 @@
 
   .small {
     font-size: 0.12rem;
+  }
+
+  .el-submenu .el-menu-item {
+    min-width: 1rem;
   }
 }
 
