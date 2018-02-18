@@ -6,11 +6,11 @@
       <el-form class="main-content" label-width="0.4rem" ref="form" :model="formData" :rules="rules" @submit.native.prevent>
         <el-form-item prop="username">
           <div class="pre-icon iconfont icon-user"></div>
-          <el-input v-model="formData.username" :placeholder="$t('txt.email')" autofocus="autofocus"></el-input>
+          <el-input v-model="formData.username" :placeholder="$t('txt.email')" autofocus="autofocus" clearable></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <div class="pre-icon iconfont icon-lock"></div>
-          <el-input type="password" v-model="formData.password" :placeholder="$t('txt.password')"></el-input>
+          <el-input type="password" v-model="formData.password" :placeholder="$t('txt.password')" clearable></el-input>
         </el-form-item>
         <div class="form-field">
           <input type="submit" :value="lblSumbit($t('txt.logining'), $t('txt.sign_in'))"
@@ -54,9 +54,6 @@ export default {
     }
   },
   methods: {
-    preSumbit: function (e) {
-      this.submitWrap(e, 'form')
-    },
     submit: function (e, postSumbit) {
       const vm = this
 

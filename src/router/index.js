@@ -9,6 +9,7 @@ import ProfileDetail from '@/components/ProfileDetail'
 import ProfileEdit from '@/components/ProfileEdit'
 import ChangePassword from '@/components/ChangePassword'
 import ResetPassword from '@/components/ResetPassword'
+import Trade from '@/components/Trade'
 import messages from '@/assets/js/messages'
 
 Vue.use(Router)
@@ -72,6 +73,13 @@ export default new Router({
           component: ChangePassword
         }
       ]
+    },
+    {
+      path: '/trade',
+      component: Trade,
+      meta: {
+        title: $(messages.cn.txt.trade)
+      }
     }
   ]
 })

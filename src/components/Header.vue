@@ -2,7 +2,9 @@
   <div class="page-header">
     <router-link class="title strong" :to="{ path: '/' }">{{ $t("txt.brand") }}</router-link>
     <el-menu :class="{ 'nav-menu': true, 'pop': isVerticalBurger }" background-color="#616161" @select="handleSelect">
-      <el-menu-item index="1">menu1</el-menu-item>
+      <el-menu-item index="1">
+        <router-link :to="{ path: '/trade' }">{{ $t("txt.trade") }}</router-link>
+      </el-menu-item>
       <el-menu-item index="2">menu2</el-menu-item>
       <el-menu-item index="3">menu3</el-menu-item>
       <el-menu-item index="4" class="sign-in-up" v-if="!isLogined">
@@ -28,38 +30,21 @@ import api from '@/assets/js/api'
 
 export default {
   name: 'Header',
+  props: ['isLogined'],
   data () {
     return {
-      isLogined: false,
       avaterUrl: '',
       isVerticalBurger: false
     }
   },
-  created: function () {
-    this.updateLoginStatus(this.$route)
-  },
   watch: {
     '$route' (to, from) {
-      this.updateLoginStatus(to)
       this.isVerticalBurger = false
     }
   },
   methods: {
     toggleBurger () {
       this.isVerticalBurger = !this.isVerticalBurger
-    },
-    updateLoginStatus (to) {
-      const vm = this
-      const unauthPagePath = [ '/sign_in', '/sign_up', '/forgot_password' ]
-      const toPath = to.fullPath.split('?')[0]
-      const ret = unauthPagePath.find((value, index, arr) => {
-        return toPath.indexOf(value) === 0
-      })
-      if (ret) {
-        vm.isLogined = false
-      } else {
-        vm.isLogined = true
-      }
     },
     handleSelect (key, keyPath) {
       if (key === '4-2') {
@@ -116,6 +101,7 @@ $headerHeight: 0.5rem;
     float: left;
     height: 0.5rem;
     line-height: 0.5rem;
+    min-width: auto;
     font-weight: bold;
     border-left: 1px solid #797979;
     cursor: pointer;
@@ -152,14 +138,14 @@ $headerHeight: 0.5rem;
       width: 0.9rem;
       border-left: none;
 
-      li {
-        width: 100%;
-      }
-
       @include if_mobile() {
         float: none;
         height: 0.5rem;
         width: auto;
+      }
+
+      li {
+        width: 100%;
       }
     }
   }

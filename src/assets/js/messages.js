@@ -38,7 +38,13 @@ const messages = {
       phone_num: '手机号码',
       language: '语言',
       chinese: '中文',
-      english: '英文'
+      english: '英文',
+      trade: '交易',
+      date: '日期',
+      order_no: '单号',
+      select_date: '选择日期',
+      search: '查询',
+      searching: '查询中...'
     },
     sentence: {
       old_password: '请输入你原先的密码',
@@ -94,14 +100,20 @@ const messages = {
       phone_num: 'cellphone',
       language: 'language',
       chinese: 'Chinese',
-      english: 'English'
+      english: 'English',
+      trade: 'trade',
+      date: 'date',
+      order_no: 'order no',
+      select_date: 'select date',
+      search: 'search',
+      searching: 'searching...'
     },
     sentence: {
       old_password: 'please input your password',
       new_password: 'please input your new password',
       confirm_password: 'please input your new password again',
       verified_lock_change: 'lock change once verified',
-      upload_tip: 'only jpg/png file，with size limits in 500kb',
+      upload_tip: 'only jpg/png file，with size limited in 500kb',
       change_pass_success: 'password saving success'
     },
     msg: {

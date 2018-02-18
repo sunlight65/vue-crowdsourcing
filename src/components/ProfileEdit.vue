@@ -17,10 +17,10 @@
         </el-upload>
       </div>
       <el-form-item :label="$t('txt.username')" prop="username">
-        <el-input v-model="formData.username" :placeholder="$t('txt.username')"></el-input>
+        <el-input v-model="formData.username" :placeholder="$t('txt.username')" clearable></el-input>
       </el-form-item>
       <el-form-item :label="$t('txt.phone_num')" prop="cellphone">
-        <el-input v-model="formData.cellphone" :placeholder="$t('txt.phone_num')"></el-input>
+        <el-input v-model="formData.cellphone" :placeholder="$t('txt.phone_num')" clearable></el-input>
       </el-form-item>
       <el-form-item :label="$t('txt.language')">
         <el-select v-model="formData.language">
@@ -64,9 +64,6 @@ export default {
     }
   },
   methods: {
-    preSumbit: function (e) {
-      this.submitWrap(e, 'form')
-    },
     submit: function (e, postSumbit) {
       const vm = this
 

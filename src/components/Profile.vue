@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <div class="profile">
+    <div :class="{ profile: true, 'other-detail': !isProfileDetail }">
       <div class="base-info">
         <div class="content-bar">
           <img :src="profile.userPic" alt="User pic" class="user-pic" />
@@ -39,11 +39,20 @@ export default {
     return {
       profile: {
         userPic: '/static/img/user_default_pic.png'
-      }
+      },
+      isProfileDetail: true
     }
   },
   activated () {
     this.getProfile()
+  },
+  created: function () {
+    this.updateProfileStatus(this.$route)
+  },
+  watch: {
+    '$route' (to, from) {
+      this.updateProfileStatus(to)
+    }
   },
   methods: {
     getProfile () {
@@ -68,6 +77,19 @@ export default {
       const vm = this
 
       api.logout(vm)
+    },
+    updateProfileStatus (to) {
+      const vm = this
+      const otherProfilePages = [ '/profile/edit', '/profile/change_password' ]
+      const toPath = to.fullPath.split('?')[0]
+      const ret = otherProfilePages.find((value, index, arr) => {
+        return toPath.indexOf(value) === 0
+      })
+      if (ret) {
+        vm.isProfileDetail = false
+      } else {
+        vm.isProfileDetail = true
+      }
     }
   }
 }
@@ -87,6 +109,12 @@ export default {
   min-width: 3.45rem;
   @include if_mobile() {
     min-width: 100%;
+  }
+
+  &.other-detail {
+    @include if_mobile() {
+      display: none;
+    }
   }
 }
 

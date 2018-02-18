@@ -5,6 +5,9 @@ export default {
     }
   },
   methods: {
+    preSumbit: function (e) {
+      this.submitWrap(e, 'form')
+    },
     submitWrap (e, formRef) {
       const vm = this
 

@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <page-header></page-header>
+    <page-header :isLogined="isLogined"></page-header>
       <keep-alive>
         <router-view/>
       </keep-alive>
     <page-footer></page-footer>
-    <mobile-bottom-nav></mobile-bottom-nav>
+    <mobile-bottom-nav :isLogined="isLogined"></mobile-bottom-nav>
   </div>
 </template>
 
@@ -20,6 +20,34 @@ export default {
     'page-header': PageHeader,
     'page-footer': PageFooter,
     'mobile-bottom-nav': MobileBottomNav
+  },
+  data () {
+    return {
+      isLogined: false
+    }
+  },
+  created: function () {
+    this.updateLoginStatus(this.$route)
+  },
+  watch: {
+    '$route' (to, from) {
+      this.updateLoginStatus(to)
+    }
+  },
+  methods: {
+    updateLoginStatus (to) {
+      const vm = this
+      const unauthPagePath = [ '/sign_in', '/sign_up', '/forgot_password' ]
+      const toPath = to.fullPath.split('?')[0]
+      const ret = unauthPagePath.find((value, index, arr) => {
+        return toPath.indexOf(value) === 0
+      })
+      if (ret) {
+        vm.isLogined = false
+      } else {
+        vm.isLogined = true
+      }
+    }
   }
 }
 </script>

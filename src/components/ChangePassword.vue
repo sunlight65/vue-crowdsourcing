@@ -4,15 +4,15 @@
     <el-form class="main-content" label-width="0.4rem" ref="form" :model="formData" :rules="rules" @submit.native.prevent>
       <el-form-item prop="password">
         <div class="pre-icon iconfont icon-lock"></div>
-        <el-input type="password" v-model="formData.password" :placeholder="$t('sentence.old_password')"></el-input>
+        <el-input type="password" v-model="formData.password" :placeholder="$t('sentence.old_password')" clearable></el-input>
       </el-form-item>
       <el-form-item prop="newPass">
         <div class="pre-icon iconfont icon-lock"></div>
-        <el-input type="password" v-model="formData.newPass" :placeholder="$t('sentence.new_password')"></el-input>
+        <el-input type="password" v-model="formData.newPass" :placeholder="$t('sentence.new_password')" clearable></el-input>
       </el-form-item>
       <el-form-item prop="confirmPass">
         <div class="pre-icon iconfont icon-lock"></div>
-        <el-input type="password" v-model="formData.confirmPass" :placeholder="$t('sentence.confirm_password')"></el-input>
+        <el-input type="password" v-model="formData.confirmPass" :placeholder="$t('sentence.confirm_password')" clearable></el-input>
       </el-form-item>
       <div class="form-field">
         <input type="submit" :value="lblSumbit($t('txt.saving'), $t('txt.confirm_modify'))"
@@ -55,9 +55,6 @@ export default {
     }
   },
   methods: {
-    preSumbit: function (e) {
-      this.submitWrap(e, 'form')
-    },
     submit: function (e, postSumbit) {
       const vm = this
 

@@ -1,6 +1,8 @@
 <template>
-<el-menu class="mobile-bottom-nav" mode="horizontal">
-  <el-menu-item index="1">菜单1</el-menu-item>
+<el-menu class="mobile-bottom-nav" mode="horizontal" v-if="isLogined">
+  <el-menu-item index="1">
+    <router-link :to="{ path: '/trade' }">{{ $t("txt.trade") }}</router-link>
+  </el-menu-item>
   <el-menu-item index="2">菜单2</el-menu-item>
   <el-menu-item index="3">菜单3</el-menu-item>
   <el-menu-item index="4">
@@ -11,7 +13,8 @@
 
 <script>
 export default {
-  name: 'MobileBottomNav'
+  name: 'MobileBottomNav',
+  props: ['isLogined']
 }
 </script>
 
