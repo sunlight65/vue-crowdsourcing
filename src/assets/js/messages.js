@@ -44,7 +44,9 @@ const messages = {
       order_no: '单号',
       select_date: '选择日期',
       search: '查询',
-      searching: '查询中...'
+      searching: '查询中...',
+      amount: '数量',
+      unit_price: '单价'
     },
     sentence: {
       old_password: '请输入你原先的密码',
@@ -106,7 +108,9 @@ const messages = {
       order_no: 'order no',
       select_date: 'select date',
       search: 'search',
-      searching: 'searching...'
+      searching: 'searching...',
+      amount: 'amount',
+      unit_price: 'unit price'
     },
     sentence: {
       old_password: 'please input your password',

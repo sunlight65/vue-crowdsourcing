@@ -69,7 +69,7 @@ export default {
 
       api.post(
         {
-          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/signin',
+          url: '/5a7accd7cc09b832453c7e62/crowdsourcing/signup',
           data: {
             username: vm.formData.username,
             password: vm.formData.password,
