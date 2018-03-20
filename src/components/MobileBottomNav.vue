@@ -25,6 +25,7 @@ export default {
   position: fixed;
   bottom: 0;
   justify-content: space-around;
+  z-index: 12;
 
   @include if_mobile() {
     display: flex;

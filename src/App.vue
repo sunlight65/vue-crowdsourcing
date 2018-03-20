@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import PageHeader from '@/components/Header'
-import PageFooter from '@/components/Footer'
+import PageHeader from '@/components/layout/Header'
+import PageFooter from '@/components/layout/Footer'
 import MobileBottomNav from '@/components/MobileBottomNav'
 
 export default {

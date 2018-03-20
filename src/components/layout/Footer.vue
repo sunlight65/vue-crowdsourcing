@@ -16,7 +16,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.copy-right {
-  text-align: center;
+.page-footer {
+  z-index: 12;
+
+  .copy-right {
+    text-align: center;
+  }
 }
 </style>

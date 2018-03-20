@@ -2,8 +2,8 @@
 @mixin html() {
   html {
     -webkit-appearance: none; // 消除输入框和按钮的原生外观
-    -webkit-text-size-adjust:none; // 允许chrome 字体小于12px
-    -webkit-user-select:none; // 禁止页面文字选择
+    -webkit-text-size-adjust: none; // 允许chrome 字体小于12px
+    -webkit-user-select: none; // 禁止页面文字选择
     font-size: 100px; // 1rem = 100px
   }
 }

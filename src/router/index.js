@@ -79,6 +79,10 @@ export default new Router({
       component: Trade,
       meta: {
         title: $(messages.cn.txt.trade)
+      },
+      beforeEnter: (to, from, next) => {
+        console.log('router beforeEnter')
+        next()
       }
     }
   ]

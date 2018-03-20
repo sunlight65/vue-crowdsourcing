@@ -69,9 +69,12 @@ $headerHeight: 0.5rem;
   height: $headerHeight;
   background: $backgroundColor;
   color: $fontColor;
+  z-index: 12;
+  min-width: 6rem;
 
   @include if_mobile() {
     justify-content: center;
+    min-width: auto;
   }
 }
 
